@@ -459,6 +459,41 @@ body {
   .day-images-row .day-image { aspect-ratio: 16/9; }
 }
 
+/* Energy & Duration badges */
+.day-meta {
+  display: flex; gap: 10px; margin: 6px 0 10px;
+  flex-wrap: wrap;
+}
+.day-meta span {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.78rem; padding: 3px 10px; border-radius: 20px;
+  font-weight: 500;
+}
+.meta-time { background: #E8F5E9; color: #2E7D32; }
+.meta-easy { background: #E0F4F4; color: #1A7A7A; }
+.meta-moderate { background: #FFF3E0; color: #E65100; }
+.meta-hard { background: #FDE8EC; color: #C0392B; }
+
+/* Back to top button */
+.back-top {
+  position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--red); color: var(--white); border: none;
+  cursor: pointer; font-size: 1.2rem; box-shadow: 0 4px 16px rgba(139,29,29,0.3);
+  transition: all 0.3s; opacity: 0; transform: translateY(10px);
+  pointer-events: none;
+}
+.back-top.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+.back-top:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+/* Vacation tip block */
+.tip-block {
+  background: linear-gradient(135deg, var(--cream), var(--white));
+  border-left: 4px solid var(--gold); border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; color: var(--text-light);
+}
+.tip-block strong { color: var(--red); }
+
 @media (max-width: 768px) {
   .timeline::before { left: 24px; }
   .timeline-item:nth-child(odd),
@@ -818,9 +853,9 @@ body {
         <li>Rajadamnern 真·泰拳现场观赛</li>
         <li>Mahanakhon 314米玻璃栈道</li>
         <li>曼谷 Rooftop Bar 高空夜景</li>
+        <li>恰图恰周末市场扫货</li>
         <li>格兰岛拖曳伞+摩托艇</li>
-        <li>Ramayana 水上乐园 / 实弹射击</li>
-        <li>老城+考山路+海滨Citywalk</li>
+        <li>老城+海滨双 Citywalk</li>
       </ul>
     </div>
 
@@ -849,7 +884,7 @@ body {
               <span class="tag tag-food">美食</span>
               <span class="tag tag-city">城市</span>
               <span class="tag tag-night">夜生活</span>
-              <span class="tag tag-transport">交通</span>
+              <span class="tag-meta"><span class="meta-moderate">🏖️ 适中</span></span>
             </div>
           </div>
           <div class="expand-icon">▼</div>
@@ -866,6 +901,7 @@ body {
           </div>
           <div class="day-section">
             <h5>🍜 晚上 — 拉差达火车夜市（Jodd Fairs）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
             <p>曼谷最火的夜市之一。必吃：火山排骨（辣爽入味）、泰式烤大虾、芒果糯米饭。水果西施的摊位是打卡热点。夜市彩色帐篷从高处俯拍非常出片！</p>
             <div class="day-images-row">
               <img class="day-image" src="images/night-market.jpg" alt="拉差达火车夜市" onclick="openLightbox(this.src)" loading="lazy">
@@ -878,11 +914,15 @@ body {
           </div>
           <div class="day-section">
             <h5>🍺 深夜 — 素坤逸精酿酒吧</h5>
-            <p>夜市逛完才十点，夜生活刚开始。推荐素坤逸 Soi 11 的 <strong>Hair of the Dog</strong>（曼谷排名前列的精酿啤酒店）或 <strong>Cheap Charlie's</strong>（传奇露天路边吧），四兄弟先干一杯。不想跑远就在夜市旁找家大排档继续吃。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 随缘</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>夜市逛完才十点，夜生活刚开始。推荐素坤逸 Soi 11 的 <strong>Hair of the Dog</strong>（曼谷排名前列的精酿啤酒店）或 <strong>Cheap Charlie's</strong>（传奇露天路边吧），四兄弟先干一杯。</p>
           </div>
           <div class="day-section">
             <h5>🚗 交通提示</h5>
             <p>搭乘 MRT 到 Phra Ram 9 站，步行约5分钟。夜市营业时间 16:00-00:00。</p>
+          </div>
+          <div class="tip-block">
+            <strong>🏖️ 度假小贴士：</strong>今天是飞行日，别把自己搞太累。飞机上睡一觉，到曼谷后适应一下时差和温度。夜市逛 2 小时够了，酒吧别喝太晚，Day 2 才是正式开玩。
           </div>
         </div>
       </div>
@@ -898,12 +938,12 @@ body {
             <div class="day-date">10月2日 周五</div>
           </div>
           <div style="flex:1; margin-left:14px;">
-            <div class="day-title">曼谷 · 老城Citywalk+大皇宫+高空日落+考山路</div>
+            <div class="day-title">曼谷 · 大皇宫+郑王庙+ICONSIAM避暑+SPA+高空日落+泰式排档</div>
             <div class="tag-row">
               <span class="tag tag-photo">拍照</span>
               <span class="tag tag-food">美食</span>
-              <span class="tag tag-city">Citywalk</span>
-              <span class="tag tag-night">夜生活</span>
+              <span class="tag tag-city">经典</span>
+              <span class="tag-meta"><span class="meta-moderate">🏖️ 适中</span></span>
             </div>
           </div>
           <div class="expand-icon">▼</div>
@@ -911,37 +951,44 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🛕 上午 — 大皇宫 + 卧佛寺</h5>
-            <p>曼谷头号地标，不去等于没来泰国。大皇宫（门票 500 泰铢）金碧辉煌，玉佛寺就在里面，建议 8:30 开门就冲。出来后步行 10 分钟到隔壁<strong>卧佛寺</strong>（门票 200 泰铢），46 米巨型卧佛非常震撼。⚠️ 长裤+有袖上衣，别穿拖鞋，门口也有租借。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-hard">🏖️ 暴走段</span></div>
+            <p>曼谷头号地标，不去等于没来。大皇宫（门票 500 泰铢）玉佛寺金碧辉煌，<strong>8:30 开门就冲</strong>，趁上午还不算太热。出来后步行 10 分钟到隔壁<strong>卧佛寺</strong>（门票 200 泰铢），46 米巨型卧佛非常震撼。⚠️ 长裤+有袖上衣，拖鞋不行。</p>
             <img class="day-image" src="images/wat-arun.jpg" alt="大皇宫" onclick="openLightbox(this.src)" loading="lazy">
           </div>
           <div class="day-section">
-            <h5>🚶 中午 — 老城 Citywalk：Tha Tian → 郑王庙</h5>
-            <p>从卧佛寺出来步行到 Tha Tian 码头（3分钟），花 5 泰铢坐渡轮横跨湄南河到对岸<strong>郑王庙（黎明寺）</strong>（门票 100 泰铢）。白色塔身嵌着彩色瓷片，越往上爬视野越震撼——四个人在塔顶的合影是这趟旅程的封面级别照片。</p>
+            <h5>🚶 上午末 — 轮渡到郑王庙</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 40 分钟</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>从卧佛寺步行 3 分钟到 Tha Tian 码头，花 5 泰铢坐渡轮横跨湄南河到<strong>郑王庙</strong>（门票 100 泰铢）。白色塔身嵌满彩色瓷片，四个人在塔顶合影——封面级出片。</p>
           </div>
           <div class="day-section">
-            <h5>🍜 下午 — Khaosan Road 考山路 Citywalk</h5>
-            <p>坐突突车 15 分钟到考山路——曼谷最野的背包客天堂。白天是宝藏街区：街边理发店编脏辫、路边摊 50 泰铢的椰子冰淇淋、纹身贴纸摊位、花衬衫 150 泰铢一件。午饭推荐考山路巷子里的<strong>Tom Yum Kung 餐厅</strong>，泰式炒粉+冬阴功。穿梭于小巷之间，每一转都像开盲盒。</p>
-            <div class="day-images-row">
-              <img class="day-image" src="images/siam-shopping.jpg" alt="考山路街景" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/curry-crab.jpg" alt="泰式街头小吃" onclick="openLightbox(this.src)" loading="lazy">
-            </div>
+            <h5>🍜 中午-下午 — ICONSIAM 暹罗天地（室内避暑）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>10 月中午 33°C，外面没法呆，<strong>ICONSIAM 是最好的避暑选择</strong>。负一楼 SookSiam 室内水上市场，全泰各地小吃汇集一排，有空调！坐河边找个位置慢悠悠吃午餐——泰式船面、芒果糯米饭、烤猪肉串，人均 200-300 泰铢。吃完在商场里转两圈消食，看看河景。</p>
+            <img class="day-image" src="images/bangkok-iconsiam.jpg" alt="ICONSIAM室内水上市场" onclick="openLightbox(this.src)" loading="lazy">
+          </div>
+          <div class="day-section">
+            <h5>💆 下午 — 泰式按摩 / SPA（恢复体力）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>上午暴走 3 小时，正好趁下午这段空档做个按摩回血。ICONSIAM 出来 Grab 15 分钟到 <strong>Health Land Sathorn</strong>（曼谷最大连锁，环境好、技师专业），<strong>2 小时传统泰式按摩 550 泰铢</strong>——全泰国性价比最高的放松方式之一。四个人一起按，刚好 16:30 前结束，无缝衔接 17:00 像素大楼看日落。不习惯泰式的话换精油按摩（约 950 泰铢/人），或者分两组各按各的。</p>
+            <img class="day-image" src="images/thai-massage.jpg" alt="泰式按摩" onclick="openLightbox(this.src)" loading="lazy">
           </div>
           <div class="day-section">
             <h5>🌇 傍晚 — Mahanakhon SkyWalk 像素大楼</h5>
-            <p>从考山路 Grab 过去 20 分钟。17:00 登顶，314 米高空的玻璃栈道悬在曼谷天际线上。四个人趴着、躺着、半推半就地站在透明玻璃上——肾上腺素和夕阳同时迸发。门票 Klook 提前买约 170 人民币/人。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>17:00 登顶，314 米高空玻璃栈道悬在曼谷天际线上。四个人趴着、躺着、半推半就地站在透明玻璃上拍照，夕阳从高楼缝隙中沉下去。门票 Klook 提前买约 170 人民币/人。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷城市夜景" onclick="openLightbox(this.src)" loading="lazy">
+              <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷夜景" onclick="openLightbox(this.src)" loading="lazy">
               <img class="day-image" src="images/mahanakhon.jpg" alt="像素大楼日落" onclick="openLightbox(this.src)" loading="lazy">
             </div>
           </div>
           <div class="day-section">
-            <h5>🍜 晚餐 — 唐人街美食扫街</h5>
-            <p>像素大楼下来 Grab 15 分钟到曼谷唐人街（Yaowarat），华灯初上时最有人间烟火气。四个男生边走边吃效率最高：Yaowarat 烤面包、蚝仔烙、猪杂胡椒汤、燕窝冰品，一条街从街头吃到街尾。每样点一份大家分，人均 200-300 泰铢吃到饱。</p>
-            <img class="day-image" src="images/yaowarat.jpg" alt="曼谷唐人街美食" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🍜 晚餐 — Silom Soi Convent 泰式排档一条街</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>从像素大楼走路 10 分钟就到 Silom Soi Convent——曼谷白领下班后的食堂一条街。整条巷子摆满地道泰式大排档，没有游客团，全是本地人。必吃：<strong>泰式烤鸡（Gai Yang）</strong>、冬阴功汤、凉拌木瓜沙拉、泰式炒空心菜、碳烤猪颈肉。四个男生点一桌菜人均 200-400 泰铢，比商城餐厅便宜一半还更香。</p>
+            <img class="day-image" src="images/yaowarat.jpg" alt="泰式排档街" onclick="openLightbox(this.src)" loading="lazy">
           </div>
-          <div class="day-section">
-            <h5>🍺 深夜 — 重返考山路 / Soi Nana</h5>
-            <p>如果体力还有余量，考山路夜晚比白天野 10 倍——露天 DJ、街边鸡尾酒桶（是的，桶）、4 个人点一桶 Punch 只要 500 泰铢。想更 Local 一点就去唐人街旁边的 <strong>Soi Nana</strong>（不是娜娜广场，是 Chinatown 的同名巷子），隐藏着曼谷最酷的独立酒吧 Tep Bar，泰式草药调的鸡尾酒一杯入魂。</p>
+          <div class="tip-block">
+            <strong>🏖️ 度假小贴士：</strong>上午暴走（大皇宫+卧佛寺），中午开始节奏就松了——午饭+按摩+日落+泰式排档，一气呵成不用赶。如果有人上午不想去大皇宫，可以先在酒店泳池躺到中午再汇合去 ICONSIAM。吃完排档直接回酒店休息，Day 3 有恰图恰+泰拳+天台，今晚别喝太晚。
           </div>
         </div>
       </div>
@@ -970,26 +1017,35 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🛍️ 上午-下午 — 恰图恰周末市场（Chatuchak）</h5>
-            <p>10.3 刚好是周六——亚洲最大的周末市场每周五六日才开！15000 个摊位，大到 GPS 都没用。四人策略：一人负责找吃、一人负责砍价、两人负责挑货。必买：泰国本土潮牌 T 恤（150-300 泰铢）、手工皮具、泰拳短裤（纪念品首选）、复古太阳镜、椰子壳工艺品。市场内椰子冰淇淋和烤猪肉串一路随吃随走。</p>
-            <p>⏰ 9:00-18:00 | 🚊 BTS Mo Chit 站 / MRT Chatuchak Park 站，出来跟着人流走就是。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 3-4 小时</span><span class="meta-hard">🏖️ 暴走段</span></div>
+            <p>10.3 刚好是周六——亚洲最大的周末市场每周五六日才开！15000 个摊位，大到 GPS 都没用。四人策略：一人负责找吃、一人负责砍价、两人负责挑货。必买：泰国本土潮牌 T 恤（150-300 泰铢）、手工皮具、泰拳短裤（纪念品首选）、复古太阳镜。市场内椰子冰淇淋和烤猪肉串随走随吃。</p>
+            <p>🚊 BTS Mo Chit 站 / MRT Chatuchak Park 站，跟着人流走就是。</p>
             <div class="day-images-row">
               <img class="day-image" src="images/siam-shopping.jpg" alt="恰图恰市场" onclick="openLightbox(this.src)" loading="lazy">
               <img class="day-image" src="images/thai-boat-noodle.jpg" alt="市场小吃" onclick="openLightbox(this.src)" loading="lazy">
             </div>
           </div>
           <div class="day-section">
+            <h5>🏨 下午 — 回酒店回血（重要）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>市场逛完一身汗，<strong>必须回酒店冲澡+换衣服</strong>。泳池边躺半小时，或者在房间点个 Grab 外卖吃水果。这条 2 小时休息是今天的关键——不休息的话晚上泰拳+天台酒吧你会撑不住。</p>
+          </div>
+          <div class="day-section">
             <h5>🥊 傍晚 — Rajadamnern 拳馆：真·泰拳现场</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>来泰国必须看一场真正的泰拳赛——不是表演，是实打实的对抗。<strong>Rajadamnern Stadium</strong> 是曼谷最老牌的拳场，每周六有顶级赛事。现场氛围炸裂：赌注声、助威嘶吼、骨肉撞击声，远比电视上震撼 10 倍。门票分三档：二等座 1500 泰铢就能看得很清楚，一等座 2000 泰铢（推荐），场边 VIP 3500 泰铢。Klook 可提前订。</p>
-            <p>⏰ 通常 18:00 开始，约 8-9 场比赛 | 🚕 从恰图恰 Grab 过去约 25 分钟。</p>
+            <p>通常 18:00 开始，约 8-9 场比赛 | 🚕 从酒店 Grab 过去约 25 分钟。</p>
           </div>
           <div class="day-section">
             <h5>🌃 深夜 — 曼谷天台酒吧（Rooftop Bar）</h5>
-            <p>泰拳散场后转场曼谷最顶的天台酒吧。推荐 <strong>Octave Rooftop Lounge</strong>（素坤逸万豪 45 楼，360 度无遮挡，鸡尾酒 350-500 泰铢，不强制正装）或 <strong>Tichuca Rooftop Bar</strong>（巨型 LED 水母树装置，曼谷 IG 头号打卡地，鸡尾酒 400-600 泰铢）。四个人点一轮酒，俯瞰整个曼谷夜景，值回票价。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1-2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>泰拳散场后转场曼谷最顶的天台酒吧。推荐 <strong>Octave Rooftop Lounge</strong>（素坤逸万豪 45 楼，360 度无遮挡，鸡尾酒 350-500 泰铢，不强制正装）或 <strong>Tichuca Rooftop Bar</strong>（巨型 LED 水母树装置，鸡尾酒 400-600 泰铢）。四个人点一轮酒，俯瞰整个曼谷夜景。</p>
             <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷天台夜景" onclick="openLightbox(this.src)" loading="lazy">
           </div>
           <div class="day-section">
             <h5>🍜 加餐 — 素坤逸深夜食堂</h5>
-            <p>天台酒吧下来如果又饿了，素坤逸 Soi 38 的深夜路边摊是本地人的食堂：泰式打抛饭、烤猪颈肉、木瓜沙拉，人均 60-100 泰铢。酒足饭饱步行回酒店。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 看胃口</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>天台酒吧下来如果又饿了，素坤逸 Soi 38 的深夜路边摊是本地人的食堂：泰式打抛饭、烤猪颈肉、木瓜沙拉，人均 60-100 泰铢。</p>
           </div>
         </div>
       </div>
@@ -1011,6 +1067,7 @@ body {
               <span class="tag tag-beach">海滩</span>
               <span class="tag tag-food">美食</span>
               <span class="tag tag-night">夜生活</span>
+              <span class="tag-meta"><span class="meta-moderate">🏖️ 适中</span></span>
             </div>
           </div>
           <div class="expand-icon">▼</div>
@@ -1018,6 +1075,7 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🚌 上午 — 曼谷前往芭提雅</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>推荐包车/拼车（约2小时），人均 80-120 元人民币。或到 Ekkamai 汽车东站坐大巴，约 130 泰铢/人，每30分钟一班。建议 9:00 出发，午前抵达。</p>
           </div>
           <div class="day-section">
@@ -1026,6 +1084,7 @@ body {
           </div>
           <div class="day-section">
             <h5>🛕 下午 — 真理寺（Sanctuary of Truth）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
             <p>全木雕刻的海边神殿，整座建筑没有一颗钉子，精雕细琢令人震撼。高达105米，面朝大海，夕阳时分格外神圣。出片必去！门票 500 泰铢。</p>
             <div class="day-images-row">
               <img class="day-image" src="images/sanctuary-of-truth.jpg" alt="真理寺" onclick="openLightbox(this.src)" loading="lazy">
@@ -1034,12 +1093,17 @@ body {
           </div>
           <div class="day-section">
             <h5>🌅 傍晚 — 悬崖日落餐厅</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>推荐 The Sky Gallery 或 Rimpa Lapin，悬崖上吃晚餐看天边渐变色。人均 400-700 泰铢。一定要提前打电话预约看落日位！17:00 到店最佳。</p>
             <img class="day-image" src="images/pattaya-sunset.jpg" alt="芭提雅悬崖日落" onclick="openLightbox(this.src)" loading="lazy">
           </div>
           <div class="day-section">
             <h5>🌃 晚上 — 芭提雅步行街（Walking Street）</h5>
-            <p>芭提雅夜生活心脏。四个人最佳打开方式：先沿街走一遍感受霓虹海洋，然后找一家现场乐队酒吧——推荐 <strong>Hot Tuna Bar</strong>（摇滚现场，氛围炸）或 <strong>Lucifer Disko TK</strong>（工业风夜店，音乐够劲）。不想蹦迪就去海滩路边摊坐下，点烤虾和啤酒，吹着海风聊到夜深。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ 随缘</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>芭提雅之所以被叫"男人天堂"，核心就在这 500 米。霓虹密度全球数一数二，啤酒吧、Gogo Bar、夜店、街头魔术、海鲜排档全挤在一起。四个人最佳打开方式：先沿街走一两个来回感受氛围，然后选一家现场乐队酒吧——推荐 <strong>Hot Tuna Bar</strong>（摇滚现场，氛围炸）或 <strong>Lucifer Disko TK</strong>（工业风夜店）。路上会有很多人拉你进店，<strong>不想去就微笑摇头说"No thanks"</strong>，不会纠缠。啤酒大多 80-120 泰铢一瓶，鸡尾酒桶 300-500 泰铢。最晚别喝到断片就行。</p>
+            <div class="tip-block">
+              <strong>⚠️ 实用提醒：</strong>手机钱包放前裤兜，有人递菜单直接不理。路边突突车开价巨高，坚持用 Grab。二楼以上的 Gogo Bar 进去前问清楚酒水价格，有些有最低消费。如果想看泰拳但觉得 Rajadamnern 太正式，步行街里有很多露天啤酒吧挂着电视放泰拳直播，两瓶啤酒坐一整晚。
+            </div>
           </div>
         </div>
       </div>
@@ -1055,11 +1119,13 @@ body {
             <div class="day-date">10月5日 周一</div>
           </div>
           <div style="flex:1; margin-left:14px;">
-            <div class="day-title">格兰岛一日游 · 果冻海+水上项目</div>
+            <div class="day-title">格兰岛一日游 · 果冻海+水上项目+蒂芬妮秀</div>
             <div class="tag-row">
               <span class="tag tag-beach">海岛</span>
               <span class="tag tag-photo">拍照</span>
               <span class="tag tag-food">美食</span>
+              <span class="tag tag-night">表演</span>
+              <span class="tag-meta"><span class="meta-moderate">🏖️ 适中</span></span>
             </div>
           </div>
           <div class="expand-icon">▼</div>
@@ -1067,10 +1133,12 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🚤 上午 — 前往格兰岛（Koh Larn）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 45 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>从 Bali Hai 码头坐轮渡，约 45 分钟，30 泰铢/人。或包快艇约 2000-3000 泰铢/船（可多人分摊）。建议 8:00-9:00 出发。</p>
           </div>
           <div class="day-section">
             <h5>🏖️ 上午 — 海滩时光</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
             <p><strong>Tawaen Beach</strong>：最热闹的海滩，白沙碧水，水上项目多（拖曳伞 500-800 泰铢、香蕉船 300-400 泰铢、摩托艇 800-1200 泰铢）。<br><strong>Samae Beach</strong>：更安静，适合拍照和浮潜，水质更好。</p>
             <div class="day-images-row">
               <img class="day-image" src="images/koh-larn-beach1.jpg" alt="格兰岛果冻海" onclick="openLightbox(this.src)" loading="lazy">
@@ -1082,13 +1150,19 @@ body {
             <p>海滩边有不少海鲜大排档，现捞现烤，人均 200-400 泰铢。推荐烤鱿鱼、泰式炒粉、新鲜椰子。</p>
           </div>
           <div class="day-section">
-            <h5>📸 下午 — 拍照 & 看日落</h5>
-            <p>Tien Beach 或 Nual Beach 人少景美，果冻海 + 白沙 + 椰林，随手一拍都是明信片。下午最后一班船约 18:00，别错过了。</p>
+            <h5>📸 下午 — 拍照 & 玩到最后一班船</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 到 17:00 前</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>Tien Beach 或 Nual Beach 人少景美，果冻海 + 白沙 + 椰林，随手一拍都是明信片。<strong>坐 17:00 左右的船回来</strong>，不要搭末班（18:00），留够时间回酒店冲澡。⚠️ 防晒提前补涂！岛上储物柜约 50 泰铢。</p>
             <img class="day-image" src="images/pattaya-beach.jpg" alt="芭提雅海滩椰林" onclick="openLightbox(this.src)" loading="lazy">
           </div>
           <div class="day-section">
-            <h5>⚠️ 温馨提示</h5>
-            <p>防晒！防晒！防晒！提前涂好防水的 SPF50+，带墨镜和帽子。岛上储物柜约 50 泰铢。轮渡末班时间务必确认。</p>
+            <h5>🎭 晚上 — Tiffany's Show 蒂芬妮人妖秀</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 75 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>芭提雅最经典的夜间表演，百老汇级别的舞台、灯光、服装——没有任何低俗感，就是一场华丽大秀。四个男生的反应会很有趣：有人全程惊叹、有人觉得离谱、有人手机拍到没电。三场可选：18:00 / 19:30 / 21:00，推荐 <strong>19:30 场</strong>，回来冲个澡刚好赶上。门票 Klook 约 160 人民币/人，VIP 座 200 人民币。</p>
+            <p>🎟️ 建议提前 1 天在 Klook 上订 | 📍 剧场就在 Walking Street 旁边，散场出来走路 3 分钟就是酒吧区。</p>
+          </div>
+          <div class="tip-block">
+            <strong>🏖️ 度假小贴士：</strong>海岛回来冲个澡，换身干净衣服去看秀。19:30 场 20:45 散场，出来后剧场门口就是 Walking Street 的入口——走路 3 分钟。今晚是四个男生在芭提雅的第二个夜晚，轻车熟路，可以比 Day 4 探得更深。不想走远就在剧场隔壁的 <strong>Pattaya Beer Garden</strong>（海滨露天酒吧，一瓶啤酒 80 泰铢，性价比之王）坐一晚吹海风也很舒服。如果同伴对人妖秀不感兴趣，可以分头行动：两人看秀、两人先去酒吧占位。
           </div>
         </div>
       </div>
@@ -1104,38 +1178,49 @@ body {
             <div class="day-date">10月6日 周二</div>
           </div>
           <div style="flex:1; margin-left:14px;">
-            <div class="day-title">芭提雅 · 水上乐园+海滨Citywalk+海鲜盛宴</div>
+            <div class="day-title">芭提雅 · 海滩躺平日（睡到自然醒+海鲜+日落）</div>
             <div class="tag-row">
-              <span class="tag tag-action">水上乐园</span>
-              <span class="tag tag-food">美食</span>
-              <span class="tag tag-city">Citywalk</span>
               <span class="tag tag-beach">海滩</span>
+              <span class="tag tag-food">美食</span>
+              <span class="tag-meta"><span class="meta-easy">🏖️ 轻松</span></span>
             </div>
           </div>
           <div class="expand-icon">▼</div>
         </div>
         <div class="timeline-detail">
+          <div class="tip-block">
+            <strong>🏖️ 度假小贴士：</strong>前面五天够充实了，今天就是纯度假模式——睡到几点算几点，手机放包里，享受海风。四个人分成"躺平组"和"闲逛组"也完全可以，不需要统一行动。
+          </div>
           <div class="day-section">
-            <h5>🌊 上午-下午 — Ramayana 水上乐园</h5>
-            <p>亚洲最大的水上乐园之一，四个男生疯玩半天的绝佳选择。21 条滑水道从温和到变态级别：<strong>Boomerango</strong>（几乎垂直坠落，四个人喊到嗓子哑）、<strong>Aqua Loop</strong>（站进去、板子抽掉、自由落体）、懒人河（玩累了躺着漂流睡觉）。园区够大，不缺刺激也不用排队太久。门票 Klook 约 200 人民币/人，含接送。</p>
-            <p>⏰ 10:00-18:00 | 🚗 芭提雅市区出发车程约 25 分钟。</p>
+            <h5>🌅 上午 — 睡到自然醒 + 海滨散步</h5>
+            <div class="day-meta"><span class="meta-time">不用看表</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>今天是你在泰国最后一个完整的日子，<strong>不设闹钟</strong>。起床后沿着芭提雅海滨路慢悠悠散步，找家路边的咖啡馆看海发呆。四个人可以在海滨路租一排沙滩椅（约 50 泰铢/张），叫几个椰子（30 泰铢/个）和冰啤酒，开始躺平。</p>
+            <img class="day-image" src="images/pattaya-beach.jpg" alt="芭提雅海滩躺平" onclick="openLightbox(this.src)" loading="lazy">
+          </div>
+          <div class="day-section">
+            <h5>🏊 中午-下午 — 芭提雅海滩 / 中天海滩</h5>
+            <div class="day-meta"><span class="meta-time">想呆多久呆多久</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>懒得动就在酒店泳池泡一下午；想换个沙滩就去<strong>中天海滩（Jomtien Beach）</strong>——比市区人少，水更干净，海滩更长。路边摊买个泰式炒粉 60 泰铢边走边吃。憋了五天手机想打两局完全可以，反正今天没任务。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/koh-larn-beach2.jpg" alt="水上乐园" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/tutu-beach.jpg" alt="水上滑道" onclick="openLightbox(this.src)" loading="lazy">
+              <img class="day-image" src="images/koh-larn-beach1.jpg" alt="中天海滩" onclick="openLightbox(this.src)" loading="lazy">
+              <img class="day-image" src="images/tutu-beach.jpg" alt="海滩咖啡馆" onclick="openLightbox(this.src)" loading="lazy">
             </div>
           </div>
           <div class="day-section">
-            <h5>🎯 可选替代 — 如果是"硬核派"</h5>
-            <p>四个男生想更刺激的话，下午可以换成：<strong>实弹射击体验</strong>（芭提雅有多家靶场，.22 到 .45 口径可选，一套套餐约 1500-3000 泰铢）或 <strong>ATV 越野车</strong>（穿越丛林山地，1 小时约 800-1200 泰铢）。记得带护照，提前一天预约。</p>
+            <h5>📸 下午可选 — 真理寺（之前没去可补）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 1.5 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>Day 4 如果没去够或者有人那天没去，可以趁下午去补。全木雕神殿，面朝大海，人少时走一圈非常宁静。</p>
           </div>
           <div class="day-section">
-            <h5>🚶 傍晚 — 芭提雅海滨 Citywalk</h5>
-            <p>回酒店冲个澡，沿着<strong>芭提雅海滨路（Beach Road）</strong>步行——3 公里长的海滨大道，一路椰风、街头艺人、路边烤鱿鱼摊。从 Central Marina 走到 Walking Street 入口，日落时分光影最好，边走边拍。路过<strong>Bali Hai 灯塔</strong>是拍四人合影的绝佳机位。</p>
-          </div>
-          <div class="day-section">
-            <h5>🍜 晚上 — 兰坡海鲜市场（Lan Pho）+ Jomtien 夜排档</h5>
-            <p>芭提雅最地道的海鲜扫货体验。到兰坡市场自己挑：手臂粗的濑尿虾、活蹦乱跳的老虎虾、现开的生蚝 50 泰铢一只。挑完交给旁边加工摊，炭烤+冬阴功煮+九层塔炒，四个人摆满一桌人均 500-800 泰铢。吃完如果还有战斗力，隔壁 Jomtien 海滩夜排档继续喝酒撸串。</p>
+            <h5>🍜 晚上 — 兰坡海鲜市场（压轴大餐）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>最后一顿海鲜要尽兴。兰坡市场自己挑：手臂粗的濑尿虾、活蹦乱跳的老虎虾、现开生蚝 50 泰铢一只。交给旁边加工摊炭烤+冬阴功煮+九层塔炒，四个人一桌摆了满当当地人 500-800 泰铢。</p>
             <img class="day-image" src="images/seafood-market.jpg" alt="海鲜大餐" onclick="openLightbox(this.src)" loading="lazy">
+          </div>
+          <div class="day-section">
+            <h5>🍺 入夜 — 芭提雅最后一夜</h5>
+            <div class="day-meta"><span class="meta-time">随缘</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>芭提雅最后一个晚上，想怎么过就怎么过。想再战 Walking Street 把没去的吧端了；想找家海鲜排档喝到老板收摊；想在海滩路上买两瓶啤酒坐沙滩上吹风聊人生——今晚没有计划就是最好的计划。唯一提醒：<strong>明天要赶飞机，别喝到人事不省。</strong></p>
           </div>
         </div>
       </div>
@@ -1479,34 +1564,40 @@ body {
   <p style="font-size: 0.75rem; margin-top: 16px; opacity: 0.5;">2026.10.01 — 10.07 &nbsp;|&nbsp; 上海 ↔ 曼谷 &nbsp;|&nbsp; 曼谷 + 芭提雅</p>
 </footer>
 
+<!-- Back to top -->
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">↑</button>
+
 <!-- Scripts -->
 <script>
 
 // ===== Countdown =====
-(function updateCountdown() {
-  const target = new Date('2026-10-01T08:00:00+08:00').getTime();
-  const now = Date.now();
-  const diff = target - now;
+(function initCountdown() {
+  function update() {
+    const target = new Date('2026-10-01T08:00:00+08:00').getTime();
+    const now = Date.now();
+    const diff = target - now;
 
-  if (diff <= 0) {
-    document.getElementById('cd-days').textContent = '0';
-    document.getElementById('cd-hours').textContent = '0';
-    document.getElementById('cd-mins').textContent = '0';
-    document.getElementById('cd-secs').textContent = '0';
-    return;
+    if (diff <= 0) {
+      document.getElementById('cd-days').textContent = '0';
+      document.getElementById('cd-hours').textContent = '0';
+      document.getElementById('cd-mins').textContent = '0';
+      document.getElementById('cd-secs').textContent = '0';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
   }
-
-  const d = Math.floor(diff / 86400000);
-  const h = Math.floor((diff % 86400000) / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
-
-  document.getElementById('cd-days').textContent = d;
-  document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-  document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-  document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
+  update();
+  setInterval(update, 1000);
 })();
-setInterval(updateCountdown, 1000);
 
 // ===== Checklist =====
 (function initChecklist() {
@@ -1581,19 +1672,9 @@ function speakThai(text) {
 (function initNavScroll() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav a');
-  const nav = document.getElementById('nav');
-  let lastScrollY = window.scrollY;
 
   window.addEventListener('scroll', () => {
     const currentY = window.scrollY;
-
-    // Show/hide nav
-    if (currentY > 600 && currentY > lastScrollY) {
-      nav.classList.add('hidden');
-    } else {
-      nav.classList.remove('hidden');
-    }
-    lastScrollY = currentY;
 
     // Highlight current section
     let current = '';
@@ -1604,6 +1685,9 @@ function speakThai(text) {
     navLinks.forEach(link => {
       link.classList.toggle('active', link.getAttribute('href') === '#' + current);
     });
+
+    // Back-to-top visibility
+    document.getElementById('backTop').classList.toggle('show', currentY > 400);
   });
 })();
 </script>
