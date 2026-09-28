@@ -811,15 +811,15 @@ body {
 <!-- Navigation -->
 <nav class="nav" id="nav">
   <a href="#hero" class="active">首页</a>
+  <a href="#overview">行程总览</a>
   <a href="#timeline">每日行程</a>
   <a href="#booking">提前预约</a>
+  <a href="#checklist">出行清单</a>
   <a href="#payment">消费与换钱</a>
   <a href="#transport">包车防坑</a>
-  <a href="#checklist">出行清单</a>
-  <a href="#overview">行程总览</a>
-  <a href="#budget">预算参考</a>
   <a href="#food">必吃美食</a>
   <a href="#gallery">精彩预览</a>
+  <a href="#budget">预算参考</a>
   <a href="#tips">实用锦囊</a>
   <a href="#phrases">实用泰语</a>
 </nav>
@@ -841,6 +841,60 @@ body {
     </div>
   </div>
   <div class="scroll-hint"><span></span></div>
+</section>
+
+
+<section class="section" id="overview">
+  <h2 class="section-title">行程总览</h2>
+  <p class="section-subtitle">上海 ↔ 曼谷 · 曼谷 3天 + 芭提雅 3天</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+
+    <div class="info-card">
+      <h4>✈️ 航班信息</h4>
+      <ul>
+        <li>去程：10.1（周四）17:00 浦东起飞 → 20:30 落地素万那普（BKK）</li>
+        <li>返程：10.8（周四）02:30 素万那普起飞 → 08:10 落地浦东</li>
+        <li>飞行时间：约 4 小时 30 分钟</li>
+        <li>时差：泰国比中国慢 1 小时（GMT+7）</li>
+        <li>⚠️ 文中时间均为曼谷当地时间</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>🏨 住宿安排（3人）</h4>
+      <ul>
+        <li>曼谷 3 晚：Grande Centre Point<br>Ratchadamri（近 BTS Ratchadamri 站，<br>紧邻 CentralWorld/四面佛）</li>
+        <li>芭提雅 3 晚：Holiday Inn Pattaya<br>IHG（海滨路北段，面海）</li>
+        <li>人均预算：300-500 元/晚</li>
+        <li>建议 Booking/Agoda 提前预订</li>
+        <li>⚠️ 两家酒店<strong>均不含早餐</strong>，早餐需外食解决</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>🚗 城际交通</h4>
+      <ul>
+        <li>曼谷→芭提雅：包车约 2 小时，<br>一车约 1500-2500 泰铢（SUV/轿车，3人分摊）</li>
+        <li>芭提雅→曼谷机场：包车约 2 小时</li>
+        <li>曼谷市内：BTS 轻轨 + MRT + Grab</li>
+        <li>芭提雅市内：双条车（10泰铢/人）+ Grab</li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h4>🥊 特色体验</h4>
+      <ul>
+        <li>Rajadamnern 真·泰拳现场观赛</li>
+        <li>Mahanakhon 314米玻璃栈道</li>
+        <li>曼谷 Rooftop Bar 高空夜景</li>
+        <li>恰图恰周末市场扫货</li>
+        <li>格兰岛拖曳伞+摩托艇</li>
+        <li>老城+海滨双 Citywalk</li>
+      </ul>
+    </div>
+
+  </div>
 </section>
 
 <section class="section" id="timeline">
@@ -1432,6 +1486,7 @@ body {
 
   </div>
 </section>
+
 <section class="section" id="booking">
   <h2 class="section-title">提前预约时间线</h2>
   <p class="section-subtitle">按时间从早到晚，哪些必须提前订、提前几天订</p>
@@ -1482,6 +1537,49 @@ body {
     </div>
   </div>
 </section>
+
+<section class="section" id="checklist">
+  <div class="thai-border-top"></div>
+  <h2 class="section-title">出行准备清单</h2>
+  <p class="section-subtitle">出发前逐一确认，避免遗漏</p>
+  <div class="checklist-container" id="checklist-container">
+    <div class="checklist-progress">
+      <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">0 / 0 已完成</div>
+    </div>
+    <div class="checklist-category">
+      <h4>证件与财务</h4>
+      <label><input type="checkbox" data-cat="docs"> 护照（有效期6个月以上）</label>
+      <label><input type="checkbox" data-cat="docs"> 机票行程单（电子版+纸质版）</label>
+      <label><input type="checkbox" data-cat="docs"> 酒店预订确认单</label>
+      <label><input type="checkbox" data-cat="docs"> 身份证（国内段备用）</label>
+      <label><input type="checkbox" data-cat="docs"> 泰铢现金（每人已带 5000 泰铢）</label>
+      <label><input type="checkbox" data-cat="docs"> Visa/Mastercard 信用卡</label>
+      <label><input type="checkbox" data-cat="docs"> 旅行保险单</label>
+    </div>
+    <div class="checklist-category">
+      <h4>电子设备</h4>
+      <label><input type="checkbox" data-cat="gear"> 泰国电话卡（Happy卡/AIS，提前淘宝买）</label>
+      <label><input type="checkbox" data-cat="gear"> 充电宝（≤20000mAh）</label>
+      <label><input type="checkbox" data-cat="gear"> 电源转换插头（泰国为美标两扁头）</label>
+      <label><input type="checkbox" data-cat="gear"> 手机防水袋（海边必备）</label>
+      <label><input type="checkbox" data-cat="gear"> 自拍杆/三脚架</label>
+      <label><input type="checkbox" data-cat="gear"> 下载离线地图与 Grab/Bolt App</label>
+    </div>
+    <div class="checklist-category">
+      <h4>衣物与日用</h4>
+      <label><input type="checkbox" data-cat="clothes"> 短袖短裤 x4-5套</label>
+      <label><input type="checkbox" data-cat="clothes"> 泳衣泳裤 + 拖鞋</label>
+      <label><input type="checkbox" data-cat="clothes"> 防晒霜 SPF50+</label>
+      <label><input type="checkbox" data-cat="clothes"> 墨镜 + 遮阳帽</label>
+      <label><input type="checkbox" data-cat="clothes"> 长袖薄外套（寺庙/空调房用）</label>
+      <label><input type="checkbox" data-cat="clothes"> 防蚊液</label>
+      <label><input type="checkbox" data-cat="clothes"> 常用药品（肠胃药、感冒药、创可贴）</label>
+      <label><input type="checkbox" data-cat="clothes"> 长裤/长裙（进寺庙要求）</label>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="payment">
   <h2 class="section-title">消费与换钱</h2>
   <p class="section-subtitle">支付优先级：微信/支付宝 → 信用卡 → 现金（兜底）</p>
@@ -1535,6 +1633,7 @@ body {
     </div>
   </div>
 </section>
+
 <section class="section" id="transport">
   <h2 class="section-title">包车与打车防坑</h2>
   <p class="section-subtitle">去哪找车最安全、怎么谈才不被宰</p>
@@ -1592,99 +1691,113 @@ body {
     </div>
   </div>
 </section>
-<section class="section" id="checklist">
-  <div class="thai-border-top"></div>
-  <h2 class="section-title">出行准备清单</h2>
-  <p class="section-subtitle">出发前逐一确认，避免遗漏</p>
-  <div class="checklist-container" id="checklist-container">
-    <div class="checklist-progress">
-      <div class="progress-bar"><div class="fill" id="progress-fill"></div></div>
-      <div class="progress-text" id="progress-text">0 / 0 已完成</div>
-    </div>
-    <div class="checklist-category">
-      <h4>证件与财务</h4>
-      <label><input type="checkbox" data-cat="docs"> 护照（有效期6个月以上）</label>
-      <label><input type="checkbox" data-cat="docs"> 机票行程单（电子版+纸质版）</label>
-      <label><input type="checkbox" data-cat="docs"> 酒店预订确认单</label>
-      <label><input type="checkbox" data-cat="docs"> 身份证（国内段备用）</label>
-      <label><input type="checkbox" data-cat="docs"> 泰铢现金（每人已带 5000 泰铢）</label>
-      <label><input type="checkbox" data-cat="docs"> Visa/Mastercard 信用卡</label>
-      <label><input type="checkbox" data-cat="docs"> 旅行保险单</label>
-    </div>
-    <div class="checklist-category">
-      <h4>电子设备</h4>
-      <label><input type="checkbox" data-cat="gear"> 泰国电话卡（Happy卡/AIS，提前淘宝买）</label>
-      <label><input type="checkbox" data-cat="gear"> 充电宝（≤20000mAh）</label>
-      <label><input type="checkbox" data-cat="gear"> 电源转换插头（泰国为美标两扁头）</label>
-      <label><input type="checkbox" data-cat="gear"> 手机防水袋（海边必备）</label>
-      <label><input type="checkbox" data-cat="gear"> 自拍杆/三脚架</label>
-      <label><input type="checkbox" data-cat="gear"> 下载离线地图与 Grab/Bolt App</label>
-    </div>
-    <div class="checklist-category">
-      <h4>衣物与日用</h4>
-      <label><input type="checkbox" data-cat="clothes"> 短袖短裤 x4-5套</label>
-      <label><input type="checkbox" data-cat="clothes"> 泳衣泳裤 + 拖鞋</label>
-      <label><input type="checkbox" data-cat="clothes"> 防晒霜 SPF50+</label>
-      <label><input type="checkbox" data-cat="clothes"> 墨镜 + 遮阳帽</label>
-      <label><input type="checkbox" data-cat="clothes"> 长袖薄外套（寺庙/空调房用）</label>
-      <label><input type="checkbox" data-cat="clothes"> 防蚊液</label>
-      <label><input type="checkbox" data-cat="clothes"> 常用药品（肠胃药、感冒药、创可贴）</label>
-      <label><input type="checkbox" data-cat="clothes"> 长裤/长裙（进寺庙要求）</label>
-    </div>
-  </div>
-</section>
-<section class="section" id="overview">
-  <h2 class="section-title">行程总览</h2>
-  <p class="section-subtitle">上海 ↔ 曼谷 · 曼谷 3天 + 芭提雅 3天</p>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+<section class="section" id="food">
+  <h2 class="section-title">🍜 泰国必吃美食清单</h2>
+  <p class="section-subtitle">照着点不踩雷，都是当地主流、经久不衰的招牌</p>
+  <div class="info-grid cards-2col">
 
     <div class="info-card">
-      <h4>✈️ 航班信息</h4>
+      <h4>🔥 泰式东北菜三件套</h4>
       <ul>
-        <li>去程：10.1（周四）17:00 浦东起飞 → 20:30 落地素万那普（BKK）</li>
-        <li>返程：10.8（周四）02:30 素万那普起飞 → 08:10 落地浦东</li>
-        <li>飞行时间：约 4 小时 30 分钟</li>
-        <li>时差：泰国比中国慢 1 小时（GMT+7）</li>
-        <li>⚠️ 文中时间均为曼谷当地时间</li>
+        <li><strong>泰式烤鸡（Gai Yang）</strong>：炭火烤整鸡，皮脆肉嫩，配糯米饭和辣酱</li>
+        <li><strong>凉拌木瓜沙拉（Som Tum）</strong>：青木瓜丝+花生+小番茄+青柠，酸辣开胃</li>
+        <li><strong>碳烤猪颈肉（Kor Moo Yang）</strong>：外焦里嫩，蘸泰式酸辣汁</li>
+        <li>这三样一起点，就是最地道的 Isan 东北菜吃法</li>
       </ul>
     </div>
 
     <div class="info-card">
-      <h4>🏨 住宿安排（3人）</h4>
+      <h4>🍲 招牌汤与面</h4>
       <ul>
-        <li>曼谷 3 晚：Grande Centre Point<br>Ratchadamri（近 BTS Ratchadamri 站，<br>紧邻 CentralWorld/四面佛）</li>
-        <li>芭提雅 3 晚：Holiday Inn Pattaya<br>IHG（海滨路北段，面海）</li>
-        <li>人均预算：300-500 元/晚</li>
-        <li>建议 Booking/Agoda 提前预订</li>
-        <li>⚠️ 两家酒店<strong>均不含早餐</strong>，早餐需外食解决</li>
+        <li><strong>冬阴功汤（Tom Yum Goong）</strong>：酸辣虾汤，泰国国汤，必点</li>
+        <li><strong>泰式船面（Boat Noodles）</strong>：小碗深色浓汤配肉丸炸蒜，一口一碗</li>
+        <li><strong>泰式炒河粉（Pad Thai）</strong>：酸甜咸香，挤上青柠更佳</li>
+        <li><strong>椰奶鸡汤（Tom Kha Gai）</strong>：酸辣中带椰香，温和浓郁</li>
       </ul>
     </div>
 
     <div class="info-card">
-      <h4>🚗 城际交通</h4>
+      <h4>🍚 主食与小吃</h4>
       <ul>
-        <li>曼谷→芭提雅：包车约 2 小时，<br>一车约 1500-2500 泰铢（SUV/轿车，3人分摊）</li>
-        <li>芭提雅→曼谷机场：包车约 2 小时</li>
-        <li>曼谷市内：BTS 轻轨 + MRT + Grab</li>
-        <li>芭提雅市内：双条车（10泰铢/人）+ Grab</li>
+        <li><strong>芒果糯米饭（Khao Niao Mamuang）</strong>：甜咸经典，饭后必吃</li>
+        <li><strong>泰式海南鸡饭（Khao Man Gai）</strong>：鸡肉滑嫩，蘸姜蒜酱</li>
+        <li><strong>酥炸香蕉 / 椰子冰淇淋</strong>：街边甜品，随手买</li>
+        <li><strong>烤串、香蕉煎饼（Roti）</strong>：夜市小吃人气王</li>
       </ul>
     </div>
 
     <div class="info-card">
-      <h4>🥊 特色体验</h4>
+      <h4>🦐 海鲜与特色</h4>
       <ul>
-        <li>Rajadamnern 真·泰拳现场观赛</li>
-        <li>Mahanakhon 314米玻璃栈道</li>
-        <li>曼谷 Rooftop Bar 高空夜景</li>
-        <li>恰图恰周末市场扫货</li>
-        <li>格兰岛拖曳伞+摩托艇</li>
-        <li>老城+海滨双 Citywalk</li>
+        <li><strong>碳烤大虾 / 烤鱿鱼</strong>：芭提雅兰坡市场现挑现烤</li>
+        <li><strong>咖喱蟹（Pu Pad Pong Karee）</strong>：蟹肉裹黄咖喱蛋液，下饭神器</li>
+        <li><strong>凉拌海鲜（Yam Talay）</strong>：酸辣爽口，配酒一流</li>
+        <li><strong>泰式奶茶（Cha Yen）</strong>：橘红色甜奶茶，解辣解腻</li>
       </ul>
     </div>
 
   </div>
 </section>
+
+<section class="section" id="gallery">
+  <h2 class="section-title">精彩预览</h2>
+  <p class="section-subtitle">点击图片可放大查看</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="openLightbox('images/wat-arun.jpg')">
+      <img src="images/wat-arun.jpg" alt="郑王庙" loading="lazy">
+      <div class="caption">郑王庙（黎明寺）</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/bangkok-skyline.jpg')">
+      <img src="images/bangkok-skyline.jpg" alt="曼谷夜景" loading="lazy">
+      <div class="caption">曼谷城市夜景</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/yaowarat.jpg')">
+      <img src="images/yaowarat.jpg" alt="曼谷唐人街夜景" loading="lazy">
+      <div class="caption">曼谷唐人街夜景</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/pattaya-beach.jpg')">
+      <img src="images/pattaya-beach.jpg" alt="芭提雅海滩" loading="lazy">
+      <div class="caption">芭提雅海滩</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/sanctuary-of-truth.jpg')">
+      <img src="images/sanctuary-of-truth.jpg" alt="真理寺" loading="lazy">
+      <div class="caption">真理寺</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/koh-larn-beach1.jpg')">
+      <img src="images/koh-larn-beach1.jpg" alt="格兰岛" loading="lazy">
+      <div class="caption">格兰岛果冻海</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/night-market.jpg')">
+      <img src="images/night-market.jpg" alt="夜市" loading="lazy">
+      <div class="caption">曼谷夜市</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/pattaya-sunset.jpg')">
+      <img src="images/pattaya-sunset.jpg" alt="芭提雅日落" loading="lazy">
+      <div class="caption">芭提雅日落</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/thai-boat-noodle.jpg')">
+      <img src="images/thai-boat-noodle.jpg" alt="泰式船面" loading="lazy">
+      <div class="caption">泰式船面</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/seafood-market.jpg')">
+      <img src="images/seafood-market.jpg" alt="炭烤海鲜" loading="lazy">
+      <div class="caption">炭烤海鲜</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/siam-shopping.jpg')">
+      <img src="images/siam-shopping.jpg" alt="曼谷暹罗商圈" loading="lazy">
+      <div class="caption">暹罗商圈</div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
+  <span class="close">&times;</span>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
+
 <section class="section" id="budget">
   <h2 class="section-title">预算参考</h2>
   <p class="section-subtitle">以下为一人估算（单位：人民币），可根据实际调整数量</p>
@@ -1782,109 +1895,6 @@ body {
   <p class="price-note">* 以上为舒适中等档位参考价，机票和酒店旺季建议提前 2-3 个月预订。人均总预算约 7000-12000 元。</p>
   <p class="price-note">💵 <strong>现金提示</strong>：你们每人已带 <strong>5000 泰铢</strong>（约 1000 元人民币），3 人共 15000 泰铢。日常零花（餐饮、双条车、路边摊、市集、小费）用现金，<strong>大额支出（酒店、按摩、餐厅、景点门票）尽量刷卡/支付宝</strong>，现金够用且更有底气。</p>
 </section>
-<section class="section" id="food">
-  <h2 class="section-title">🍜 泰国必吃美食清单</h2>
-  <p class="section-subtitle">照着点不踩雷，都是当地主流、经久不衰的招牌</p>
-  <div class="info-grid cards-2col">
-
-    <div class="info-card">
-      <h4>🔥 泰式东北菜三件套</h4>
-      <ul>
-        <li><strong>泰式烤鸡（Gai Yang）</strong>：炭火烤整鸡，皮脆肉嫩，配糯米饭和辣酱</li>
-        <li><strong>凉拌木瓜沙拉（Som Tum）</strong>：青木瓜丝+花生+小番茄+青柠，酸辣开胃</li>
-        <li><strong>碳烤猪颈肉（Kor Moo Yang）</strong>：外焦里嫩，蘸泰式酸辣汁</li>
-        <li>这三样一起点，就是最地道的 Isan 东北菜吃法</li>
-      </ul>
-    </div>
-
-    <div class="info-card">
-      <h4>🍲 招牌汤与面</h4>
-      <ul>
-        <li><strong>冬阴功汤（Tom Yum Goong）</strong>：酸辣虾汤，泰国国汤，必点</li>
-        <li><strong>泰式船面（Boat Noodles）</strong>：小碗深色浓汤配肉丸炸蒜，一口一碗</li>
-        <li><strong>泰式炒河粉（Pad Thai）</strong>：酸甜咸香，挤上青柠更佳</li>
-        <li><strong>椰奶鸡汤（Tom Kha Gai）</strong>：酸辣中带椰香，温和浓郁</li>
-      </ul>
-    </div>
-
-    <div class="info-card">
-      <h4>🍚 主食与小吃</h4>
-      <ul>
-        <li><strong>芒果糯米饭（Khao Niao Mamuang）</strong>：甜咸经典，饭后必吃</li>
-        <li><strong>泰式海南鸡饭（Khao Man Gai）</strong>：鸡肉滑嫩，蘸姜蒜酱</li>
-        <li><strong>酥炸香蕉 / 椰子冰淇淋</strong>：街边甜品，随手买</li>
-        <li><strong>烤串、香蕉煎饼（Roti）</strong>：夜市小吃人气王</li>
-      </ul>
-    </div>
-
-    <div class="info-card">
-      <h4>🦐 海鲜与特色</h4>
-      <ul>
-        <li><strong>碳烤大虾 / 烤鱿鱼</strong>：芭提雅兰坡市场现挑现烤</li>
-        <li><strong>咖喱蟹（Pu Pad Pong Karee）</strong>：蟹肉裹黄咖喱蛋液，下饭神器</li>
-        <li><strong>凉拌海鲜（Yam Talay）</strong>：酸辣爽口，配酒一流</li>
-        <li><strong>泰式奶茶（Cha Yen）</strong>：橘红色甜奶茶，解辣解腻</li>
-      </ul>
-    </div>
-
-  </div>
-</section>
-<section class="section" id="gallery">
-  <h2 class="section-title">精彩预览</h2>
-  <p class="section-subtitle">点击图片可放大查看</p>
-  <div class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox('images/wat-arun.jpg')">
-      <img src="images/wat-arun.jpg" alt="郑王庙" loading="lazy">
-      <div class="caption">郑王庙（黎明寺）</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/bangkok-skyline.jpg')">
-      <img src="images/bangkok-skyline.jpg" alt="曼谷夜景" loading="lazy">
-      <div class="caption">曼谷城市夜景</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/yaowarat.jpg')">
-      <img src="images/yaowarat.jpg" alt="曼谷唐人街夜景" loading="lazy">
-      <div class="caption">曼谷唐人街夜景</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/pattaya-beach.jpg')">
-      <img src="images/pattaya-beach.jpg" alt="芭提雅海滩" loading="lazy">
-      <div class="caption">芭提雅海滩</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/sanctuary-of-truth.jpg')">
-      <img src="images/sanctuary-of-truth.jpg" alt="真理寺" loading="lazy">
-      <div class="caption">真理寺</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/koh-larn-beach1.jpg')">
-      <img src="images/koh-larn-beach1.jpg" alt="格兰岛" loading="lazy">
-      <div class="caption">格兰岛果冻海</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/night-market.jpg')">
-      <img src="images/night-market.jpg" alt="夜市" loading="lazy">
-      <div class="caption">曼谷夜市</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/pattaya-sunset.jpg')">
-      <img src="images/pattaya-sunset.jpg" alt="芭提雅日落" loading="lazy">
-      <div class="caption">芭提雅日落</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/thai-boat-noodle.jpg')">
-      <img src="images/thai-boat-noodle.jpg" alt="泰式船面" loading="lazy">
-      <div class="caption">泰式船面</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/seafood-market.jpg')">
-      <img src="images/seafood-market.jpg" alt="炭烤海鲜" loading="lazy">
-      <div class="caption">炭烤海鲜</div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('images/siam-shopping.jpg')">
-      <img src="images/siam-shopping.jpg" alt="曼谷暹罗商圈" loading="lazy">
-      <div class="caption">暹罗商圈</div>
-    </div>
-  </div>
-</section>
-
-<!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
-  <span class="close">&times;</span>
-  <img src="" alt="" id="lightbox-img">
-</div>
 
 <section class="section" id="tips">
   <h2 class="section-title">实用锦囊</h2>
@@ -1956,6 +1966,7 @@ body {
 
   </div>
 </section>
+
 <section class="section" id="phrases">
   <h2 class="section-title">实用泰语速成</h2>
   <p class="section-subtitle">点击卡片可听发音（需浏览器支持 Speech API）</p>
