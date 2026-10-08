@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>泰国旅行攻略 · 曼谷+芭提雅 8天7晚 | 2026.10.1-10.8</title>
+<meta name="description" content="2026 国庆泰国 8 天 7 晚攻略：曼谷 3 晚 + 芭提雅 3 晚，含逐小时行程、预约清单、防坑要点与预算参考。">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 /* ===== CSS Variables & Reset ===== */
@@ -28,7 +29,7 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; font-size: 16px; }
+html { font-size: 16px; }
 
 body {
   font-family: var(--font-sans);
@@ -93,8 +94,10 @@ body {
 }
 
 @media (max-width: 768px) {
-  .nav { padding: 0 12px; gap: 2px; }
+  .nav { padding: 0 12px; gap: 2px; height: auto; min-height: 52px; flex-wrap: wrap; }
   .nav a { padding: 5px 10px; font-size: 0.75rem; }
+  /* 小屏：顶部导航会换行变高，day-nav 改为不吸顶，避免与导航重叠 */
+  .day-nav { position: static; top: auto; }
 }
 
 /* ===== Hero Section ===== */
@@ -164,36 +167,6 @@ body {
   border-radius: 40px;
   font-size: 1.1rem;
   letter-spacing: 0.06em;
-}
-
-/* Countdown */
-.countdown {
-  margin-top: 32px;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.countdown .cd-box {
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(212,168,67,0.3);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  min-width: 80px;
-  text-align: center;
-}
-.cd-box .cd-num {
-  font-family: var(--font-serif);
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: var(--gold);
-  line-height: 1;
-}
-.cd-box .cd-label {
-  font-size: 0.8rem;
-  color: var(--gold-light);
-  margin-top: 4px;
 }
 
 /* Scroll down arrow */
@@ -495,6 +468,14 @@ body {
   aspect-ratio: 16/9;
   object-fit: cover;
   display: block;
+  height: auto;
+  background: var(--cream-dark);
+}
+/* <picture> wrapper: 作为真正的块级盒子参与布局（不能用 display:contents，
+   否则栅格里 <img> 会失去轨道尺寸、被压成竖条） */
+picture {
+  display: block;
+  width: 100%;
 }
 .day-image:hover { transform: scale(1.02); }
 .day-images-row {
@@ -503,6 +484,7 @@ body {
   gap: 10px;
   margin: 10px 0;
 }
+.day-images-row picture { margin: 0; min-width: 0; }
 .day-images-row .day-image { margin: 0; aspect-ratio: 4/3; }
 @media (max-width: 480px) {
   .day-images-row { grid-template-columns: 1fr; }
@@ -543,6 +525,21 @@ body {
   padding: 14px 18px; margin: 12px 0; font-size: 0.9rem; color: var(--text-light);
 }
 .tip-block strong { color: var(--red); }
+
+/* ===== Utility classes（替代内联样式） ===== */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.day-header-main { flex: 1; margin-left: 14px; }
+.note-sm { font-size: 0.85rem; color: #888; }
+.note-xs { font-size: 13px; color: #888; margin-top: 8px; }
+.timeline-detail.always-open { display: block; }
+.table-scroll { overflow-x: auto; }
+.footer-meta { font-size: 0.75rem; margin-top: 16px; opacity: 0.5; }
+.span-full { grid-column: 1 / -1; }
+.flex-note { margin-bottom: 10px; }
 
 @media (max-width: 768px) {
   .timeline::before { left: 24px; }
@@ -744,6 +741,11 @@ body {
   transition: all 0.3s;
 }
 .gallery-item:hover { transform: scale(1.03); }
+.gallery-item picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .gallery-item img {
   width: 100%; height: 100%;
   object-fit: cover;
@@ -778,12 +780,30 @@ body {
 }
 .lightbox .close {
   position: absolute;
-  top: 24px;
-  right: 32px;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 2rem;
-  color: white;
+  line-height: 1;
+  color: #fff;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
   cursor: pointer;
-  z-index: 1;
+  z-index: 2;
+  -webkit-tap-highlight-color: transparent;
+}
+.lightbox .close:hover,
+.lightbox .close:focus-visible {
+  background: rgba(255,255,255,0.28);
+  outline: none;
+}
+@media (max-width: 768px) {
+  .lightbox .close { top: 10px; right: 10px; width: 44px; height: 44px; font-size: 1.7rem; }
 }
 
 /* Divider ornament */
@@ -833,12 +853,6 @@ body {
     <h1>泰国旅行攻略</h1>
     <p class="subtitle">曼谷 · 芭提雅 &nbsp; 8天7晚</p>
     <div class="date-badge">2026.10.01 — 10.08</div>
-    <div class="countdown" id="countdown">
-      <div class="cd-box"><div class="cd-num" id="cd-days">--</div><div class="cd-label">天</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">时</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">分</div></div>
-      <div class="cd-box"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">秒</div></div>
-    </div>
   </div>
   <div class="scroll-hint"><span></span></div>
 </section>
@@ -846,18 +860,18 @@ body {
 
 <section class="section" id="overview">
   <h2 class="section-title">行程总览</h2>
-  <p class="section-subtitle">上海 ↔ 曼谷 · 曼谷 3天 + 芭提雅 3天</p>
+  <p class="section-subtitle">上海 ↔ 曼谷 · 曼谷 3 晚 + 芭提雅 3 晚，共 8 天 7 晚</p>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+  <div class="overview-grid">
 
     <div class="info-card">
       <h4>✈️ 航班信息</h4>
       <ul>
         <li>去程：10.1（周四）17:00 浦东起飞 → 20:30 落地素万那普（BKK）</li>
-        <li>返程：10.8（周四）02:30 素万那普起飞 → 08:10 落地浦东</li>
+        <li>返程：<strong>10.7（周三）深夜</strong>前往机场，<strong>10.8 凌晨 02:30</strong> 素万那普起飞 → 08:10 落地浦东</li>
         <li>飞行时间：约 4 小时 30 分钟</li>
-        <li>时差：泰国比中国慢 1 小时（GMT+7）</li>
-        <li>⚠️ 文中时间均为曼谷当地时间</li>
+        <li>时差：泰国比中国<strong>慢 1 小时</strong>（泰国 GMT+7 / 中国 GMT+8）。落地当晚 20:30 时，国内已是 21:30</li>
+        <li>⚠️ 文中时间均为曼谷当地时间（返程落地时间标注为北京时间）</li>
       </ul>
     </div>
 
@@ -865,8 +879,9 @@ body {
       <h4>🏨 住宿安排（3人）</h4>
       <ul>
         <li>曼谷 3 晚：Grande Centre Point<br>Ratchadamri（近 BTS Ratchadamri 站，<br>紧邻 CentralWorld/四面佛）</li>
-        <li>芭提雅 3 晚：Holiday Inn Pattaya<br>IHG（海滨路北段，面海）</li>
-        <li>人均预算：300-500 元/晚</li>
+        <li>芭提雅 3 晚：Holiday Inn Pattaya<br>IHG（海滨路北段面海，<strong>正对芭提雅唐人街</strong>，周边中餐厅、美食、按摩店超多）</li>
+        <li>人均预算：1500-2500 泰铢/晚（约 300-500 元）</li>
+        <li>✅ 实测：曼谷这家住得舒服、位置好，但<strong>价格偏贵</strong>，预算紧可自行换成同区性价比更高的酒店</li>
         <li>建议 Booking/Agoda 提前预订</li>
         <li>⚠️ 两家酒店<strong>均不含早餐</strong>，早餐需外食解决</li>
       </ul>
@@ -894,12 +909,27 @@ body {
       </ul>
     </div>
 
+    <div class="info-card span-full">
+      <h4>🧭 关于这份行程：灵活搭配，别当任务清单</h4>
+      <p class="flex-note">下面 7 天的安排是<strong>「已验证可行的参考路线」，不是必须打卡的任务表</strong>。请把它当成一个<strong>菜单</strong>——挑想去的、按自己的节奏来。</p>
+      <ul>
+        <li><strong>可以自由搭配</strong>：想去的地方就去，不想去的<strong>直接跳过</strong>，不用有心理负担。攻略的价值是「告诉你有什么、怎么去、要注意什么」，而不是「必须做完」。</li>
+        <li><strong>时间只是参考</strong>：每天几点到几点是<strong>大致节奏</strong>，不是硬性时间表。睡到自然醒、在某处多待两小时，都完全没问题。</li>
+        <li><strong>累了就砍项目</strong>：行程排得比较满，但随时可以<strong>删掉一两个点</strong>换休息、泳池、咖啡、按摩。<strong>从容舒服 &gt; 打卡齐全</strong>。</li>
+        <li><strong>可整体挪动</strong>：某个下午的安排看着不合适，就挪到别的空闲时段，或干脆取消。攻略里标「可选 / 推荐 / 备选」的段落，都是可以弹性处理的。</li>
+        <li>⚠️ <strong>唯一真正要卡时间的，就这几件</strong>：<strong>航班</strong>（10.1 去程 / 10.8 凌晨返程）、<strong>换城市那天的退房</strong>（10.4 曼谷 12:00 退、10.7 芭提雅 11:00-12:00 退）、以及<strong>提前订好的票和餐厅</strong>（像素大楼 / 泰拳 / 蒂芬妮秀 / 悬崖餐厅）。其余全都可以随性调整。</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
 <section class="section" id="timeline">
   <h2 class="section-title">每日详细行程</h2>
   <p class="section-subtitle">点日期跳转，点卡片展开详情</p>
+  <div class="tip-block flex-note">
+    <strong>🧭 先看这条：下面是参考路线，不是任务清单。</strong>想去就去、不想去直接跳过；时间只是大致节奏，睡到自然醒、某处多待会儿都没问题；累了就砍项目换休息。<strong>真正要卡时间的只有：航班、两次退房、以及提前订好的票和餐厅。</strong>其余随性安排，从容最重要 —— 详见上方「行程总览」里的灵活搭配说明。
+  </div>
 
   <div class="day-nav" id="dayNav">
     <button class="day-nav-btn active" data-target="day1">10.1 抵达曼谷</button>
@@ -919,13 +949,13 @@ body {
     <!-- Day 1 -->
     <div class="timeline-item" id="day1">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">01</div>
             <div class="day-date">10月1日 周四（飞行日）</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
+          <div class="day-header-main">
             <div class="day-title">上海 → 曼谷 · 夜航抵达+入住</div>
             <div class="tag-row">
               <span class="tag tag-transport">交通</span>
@@ -938,7 +968,7 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🕐 15:00 — 抵达浦东机场（T2）</h5>
-            <p>国际航班建议提前 2 小时到机场值机。三人从各自位置出发，约好 15:00 在值机柜台集合。<strong>把护照、行程单、酒店预订单放随身包里</strong>，值机+托运+安检+出境，从容走完留 40 分钟逛免税店。</p>
+            <p>国际航班建议提前 2 小时到机场值机。三人从各自位置出发，约好 15:00 在值机柜台集合。<strong>值机只需要护照</strong>，行程单、酒店预订单用不上（有电子版存手机里备用即可）。值机+托运+安检+出境，从容走完留 40 分钟逛免税店。</p>
           </div>
           <div class="day-section">
             <h5>🕐 17:00 — 起飞 ✈️</h5>
@@ -946,20 +976,27 @@ body {
           </div>
           <div class="day-section">
             <h5>🕐 20:30 — 落地曼谷素万那普（BKK）</h5>
-            <p>落地后：① 过边检（免签，拿护照即可）② 取行李 ③ <strong>激活泰国电话卡</strong>（提前淘宝买的 Happy/AIS 卡，插卡即用）④ 换一点泰铢现钞（机场汇率一般，先换 1000-2000 泰铢应急）。全程约 40-60 分钟。</p>
-            <img class="day-image" src="images/airport.jpg" alt="素万那普机场" onclick="openLightbox(this.src)" loading="lazy">
+            <p>落地后：① <strong>过边检（免签，护照 + 电子入境卡即可）</strong>——电子入境卡（TDAC）<strong>务必在值机前就提前填好</strong>（官网或购票平台如飞猪买票后的快捷入口），不要等落地再弄 ② 取行李 ③ <strong>激活泰国电话卡</strong>（提前淘宝买的 Happy/AIS 卡，插卡即用）④ 换一点泰铢现钞（机场汇率一般，但如果之前没换，<strong>尽量在机场先换 1000-2000 泰铢应急</strong>——有些费用只收现金，支付宝/微信覆盖不到，比如打车给小费、路边摊、部分景点票）。全程约 40-60 分钟。</p>
+            <picture>
+  <source srcset="images/airport.webp" type="image/webp">
+  <img class="day-image" src="images/airport.jpg" alt="素万那普机场" width="1400" height="941" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
             <h5>🕐 21:00-21:30 — 前往酒店</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 35-50 分钟</span></div>
-            <p>三位男生+行李，直接 <strong>Grab 叫一辆大车（约 450-550 泰铢）</strong>直达酒店，比机场快线换 BTS 省事得多。目的地：<strong>Grande Centre Point Ratchadamri</strong>。</p>
+            <p>三位男生+行李，直接 <strong>Grab 叫车直达酒店</strong>。✅ 机场有专门的 Grab 上车分区，跟着机场指示牌走就行，到对应分区位置等车，整个过程和国内用滴滴一模一样，很好上手。目的地：<strong>Grande Centre Point Ratchadamri</strong>。</p>
           </div>
           <div class="day-section">
             <h5>🕐 22:00 — 入住 + 酒店周边吃宵夜</h5>
-            <p>办入住、放行李、简单洗漱。酒店就在 CentralWorld/四面佛旁边，<strong>楼下走几步就有夜市摊和小吃</strong>。落地第一顿吃点清淡的——泰式米粉汤、烤串，配杯泰式奶茶，别一上来就搞重口。吃完早点休息，明天正式开始。</p>
+            <p>办入住、放行李、简单洗漱。酒店就在 CentralWorld/四面佛旁边，<strong>楼下走几步就有夜市摊和小吃</strong>。✅ 实测选摊技巧：先走一圈，挑<strong>人比较多</strong>的那家路边摊坐，<strong>提前看菜单标价</strong>再点，性价比一般不差。落地第一顿吃点清淡的——泰式米粉汤、烤串，配杯泰式奶茶，别一上来就搞重口。吃完早点休息，明天正式开始。</p>
+            <picture>
+  <source srcset="images/grande-centre-point.webp" type="image/webp">
+  <img class="day-image" src="images/grande-centre-point.jpg" alt="拉查丹利中心酒店" width="972" height="648" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="tip-block">
-            <strong>🏖️ 度假小贴士：</strong>今天就是「到」的那天，没任务。落地别兴奋过度，12 点前睡。泰国比国内慢 1 小时（此刻国内已是 23:00+），你的生物钟其实已经挺晚了，早点睡适应即可。
+            <strong>🏖️ 度假小贴士：</strong>今天就是「到」的那天，没任务。落地别兴奋过度，争取 12 点前睡。泰国比国内慢 1 小时（此刻你 20:30 落地，国内已是 21:30），加上飞了 4 个多小时，其实已经很困了，别再安排活动，早点睡把生物钟调过来即可。
           </div>
         </div>
       </div>
@@ -968,14 +1005,14 @@ body {
     <!-- Day 2 -->
     <div class="timeline-item" id="day2">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">02</div>
             <div class="day-date">10月2日 周五</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
-            <div class="day-title">曼谷 · 大皇宫+郑王庙+ICONSIAM避暑+SPA+高空日落+泰式排档</div>
+          <div class="day-header-main">
+            <div class="day-title">曼谷 · 大皇宫+郑王庙+ICONSIAM避暑+像素大楼日落+SPA</div>
             <div class="tag-row">
               <span class="tag tag-photo">拍照</span>
               <span class="tag tag-food">美食</span>
@@ -988,22 +1025,31 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🕐 07:00 — 起床 + 早餐</h5>
-            <p>⚠️ 酒店<strong>不含早餐</strong>。今天上午暴走大皇宫，建议吃顿抗饿的：</p>
-            <ul>
-              <li><strong>推荐：水门市场「红大哥海南鸡饭」（Go-Ang Kaomangai Pratunam / Kaiton）</strong>——曼谷海南鸡饭老字号，步行约 10-15 分钟或 1 站 BTS 到水门市场（Pratunam），鸡饭滑嫩配姜蒜辣椒蘸酱，人均约 80-150 泰铢，碳水足、扛暴走。</li>
-              <li>赶时间：酒店楼下 7-11 或路边摊，泰式油条蘸绿酱（煎炸豆腐/斑兰酱）+ 豆浆，50-100 泰铢速战速决。</li>
-            </ul>
-            <p>出门前涂防晒，穿<strong>长裤/过膝裙+有袖上衣</strong>（进大皇宫硬性要求）。</p>
+            <p>⚠️ 酒店<strong>不含早餐</strong>。✅ 实测最优解：<strong>直接楼下 7-Eleven 解决</strong>——三明治、饭团、烤肠、豆浆咖啡，又快又便宜又扛饿，别专程跑去吃推荐的网红早餐店了（要走路还要排队）。</p>
+            <p>起床时间不用卡那么早，<strong>自己按当天节奏规划</strong>即可，睡够再出门，大皇宫逛起来也从容。出门前涂防晒，穿<strong>长裤/过膝裙+有袖上衣</strong>（进大皇宫硬性要求）。</p>
           </div>
           <div class="day-section">
             <h5>🕐 08:00 — 出发去大皇宫</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 车程约 15-20 分钟</span></div>
-            <p>Grab 打车去大皇宫（约 120-150 泰铢）。<strong>8:30 开门就冲</strong>，趁上午还没那么热、旅行团没到。</p>
+            <p>Grab 打车到大皇宫（约 120-150 泰铢），直接定位到<strong>下客区</strong>，下车后步行到售票口。</p>
+            <div class="tip-block">
+              <strong>🚨 实测防骗提醒：</strong>下客点会有人主动凑上来搭话，自称"志愿者/工作人员"，用中文跟你说"今天不开放/要先去别的地方"，忽悠你改走其他行程——<strong>全是骗子，一律不理</strong>。牢记：<strong>在泰国主动上来帮你、还会说中文的，大概率是骗子</strong>（目的是骗你报付费项目）。不用慌，他们只是推销、人身安全一般没问题，你<strong>全程不搭理、按自己的规划走</strong>即可。下车跟着导航/人流走，直接走到售票口买票。
+            </div>
           </div>
           <div class="day-section">
             <h5>🕐 08:30-10:30 — 大皇宫 + 玉佛寺（约 2 小时）</h5>
             <div class="day-meta"><span class="meta-hard">🏖️ 暴走段</span></div>
             <p>曼谷头号地标，门票 <strong>500 泰铢</strong>。玉佛寺金碧辉煌，跟着人流走主线，重点看玉佛殿和节基殿。⚠️ 别碰僧侣、别用脚指佛像。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/grand-palace-1.webp" type="image/webp">
+  <img class="day-image" src="images/grand-palace-1.jpg" alt="大皇宫玉佛寺" width="1279" height="1639" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/grand-palace-2.webp" type="image/webp">
+  <img class="day-image" src="images/grand-palace-2.jpg" alt="大皇宫" width="1400" height="1050" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
             <h5>🕐 10:30-11:30 — 卧佛寺（步行 8 分钟）</h5>
@@ -1014,56 +1060,77 @@ body {
             <h5>🕐 11:30-12:00 — 轮渡到郑王庙</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 30 分钟</span></div>
             <p>从卧佛寺步行 3 分钟到 <strong>Tha Tian 码头</strong>，5 泰铢渡轮横跨湄南河到郑王庙（门票 100 泰铢）。白色塔身嵌满彩色瓷片，爬到塔身中层俯瞰河景——上午光线拍出来最干净。</p>
-            <img class="day-image" src="images/wat-arun.jpg" alt="郑王庙" onclick="openLightbox(this.src)" loading="lazy">
+            <picture>
+  <source srcset="images/wat-arun.webp" type="image/webp">
+  <img class="day-image" src="images/wat-arun.jpg" alt="郑王庙" width="1400" height="1177" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
-            <h5>🕐 12:00-14:00 — 郑王庙 + 前往 ICONSIAM</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span></div>
-            <p>逛完郑王庙，在码头坐 ICONSIAM 的<strong>免费接驳船</strong>（约 10 分钟）过河到暹罗天地。10 月正午 33°C，正好躲进空调商场避暑。</p>
+            <h5>🕐 12:00-13:30 — 郑王庙 + 前往 ICONSIAM</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span></div>
+            <p>逛郑王庙约 1 小时，然后在码头坐 ICONSIAM 的<strong>免费接驳船</strong>（约 10 分钟）过河到暹罗天地。10 月正午 33°C，正好躲进空调商场避暑。</p>
+            <p>✅ 弹性备选：如果大皇宫+卧佛寺逛得太久、有点超时又饿了，可以<strong>不进郑王庙</strong>——在 Tha Tian 码头对岸<strong>拍个郑王庙照</strong>（河畔机位很出片），然后直接坐船去 ICONSIAM 吃饭，一样不耽误。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 12:30-14:00 — ICONSIAM 午餐（室内避暑）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>负一楼 <strong>SookSiam 室内水上市场</strong>，全泰各地小吃汇集，有空调！泰式船面、芒果糯米饭、烤猪肉串，人均 200-300 泰铢。吃完在商场里消食看河景。</p>
-            <img class="day-image" src="images/bangkok-iconsiam.jpg" alt="ICONSIAM室内水上市场" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🕐 13:30-16:00 — ICONSIAM （午餐+逛街+咖啡充电）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>负一楼 <strong>SookSiam 室内水上市场</strong>，全泰各地小吃汇集，有空调！泰式船面、芒果糯米饭、烤猪肉串，人均 200-300 泰铢。✅ 实测：商场很好逛，一不小心就逛到下午。逛累了可以去 <strong>% Arabica（阿拉比卡）咖啡</strong>坐坐：点杯咖啡、给手机充会儿电、刷半小时手机，非常惬意。<strong>💡 顺便把后面行程要预约的票都搞定</strong>——比如 <strong>泰拳赛</strong>（周六 RWS 世界系列赛最热门，需提前定；订不到就顺延到周三传统赛）、蒂芬妮秀等，热门场次会售罄，趁这会儿在 Klook/官网上提前买好。</p>
+            <picture>
+  <source srcset="images/bangkok-iconsiam.webp" type="image/webp">
+  <img class="day-image" src="images/bangkok-iconsiam.jpg" alt="ICONSIAM室内水上市场" width="1400" height="1050" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
-            <h5>🕐 14:00-14:20 — 去按摩（Grab）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 车程约 15-20 分钟</span></div>
-            <p>ICONSIAM 出来 Grab 去 <strong>Health Land Sathorn</strong>（曼谷最大按摩连锁，N Sathon Rd，近 BTS Chong Nonsi）。<strong>建议提前电话/Line 预约</strong>，否则黄金时段可能等位。上午暴走 3 小时，正好回血。</p>
+            <h5>🕐 15:30-16:00 — 直接出发去像素大楼（务必按时）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 车程约 20-30 分钟</span></div>
+            <p>从 ICONSIAM <strong>直接 Grab 去 Mahanakhon 大楼</strong>，不用回酒店休整（洗澡留到晚上）。✅ <strong>重点：最晚 15:30 就出发</strong>——顶层露天区 <strong>18:00 清场</strong>，而 10 月曼谷日落约 <strong>18:00</strong>，中间还要排电梯、安检。想完整看到日落，就要 <strong>17:00 前站上露天层</strong>，留足排队和拍摄时间。门票 Klook 提前买约 850 泰铢/人（约 170 元），免排队。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 14:30-16:30 — 泰式按摩（约 2 小时）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p><strong>传统泰式按摩 2 小时约 600-700 泰铢</strong>，性价比之王。三人一起按，16:30 前结束，无缝衔接像素大楼看日落。不习惯泰式就换精油按摩（约 1,000 泰铢）。</p>
-            <img class="day-image" src="images/thai-massage.jpg" alt="泰式按摩" onclick="openLightbox(this.src)" loading="lazy">
-          </div>
-          <div class="day-section">
-            <h5>🕐 16:30-17:00 — 前往像素大楼</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 车程约 15 分钟</span></div>
-            <p>Grab 前往 Mahanakhon 大楼。门票 Klook 提前买约 170 人民币/人，免排队。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 17:00-18:30 — Mahanakhon SkyWalk 看日落</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>314 米玻璃栈道悬在曼谷天际线上，夕阳从高楼缝隙沉下去。三个人互相壮胆站上透明玻璃拍照。</p>
+            <h5>🕐 16:00-18:00 — Mahanakhon SkyWalk 露天层（日落前必须到位）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>314 米玻璃栈道悬在曼谷天际线上。✅ <strong>正确节奏：16:00 左右到达 → 16:30 前上到 314 米露天层 → 17:00-18:00 等日落、拍够</strong>。三个人互相壮胆站上透明玻璃拍照。</p>
+            <div class="tip-block">
+              <strong>⚠️ 关于日落（重要，别踩坑）：</strong>顶层<strong>开放式露天区 18:00 就清场</strong>，之后必须下到室内层。10 月曼谷日落约 <strong>18:00-18:10</strong>，也就是说<strong>露天层看不到太阳完全沉下去的那一刻</strong>——真正「日落全景」只能在室内层隔着玻璃看。<br>
+              ① 想拍到最好的光：<strong>17:00-17:45 的黄昏金光</strong>是露天层最出片的时间，务必抓住；<br>
+              ② 若 16:00 才出发、排队长，很可能连黄昏都赶不上，<strong>那就只剩室内层</strong>；<br>
+              ③ 别把「玻璃栈道看日落」当成必达目标，把预期调整成「<strong>露天层看黄昏 + 室内层看日落</strong>」，体验反而更好。
+            </div>
             <div class="day-images-row">
-              <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷夜景" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/mahanakhon.jpg" alt="像素大楼日落" onclick="openLightbox(this.src)" loading="lazy">
+              <picture>
+  <source srcset="images/bangkok-skyline.webp" type="image/webp">
+  <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷夜景" width="1400" height="788" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/mahanakhon.webp" type="image/webp">
+  <img class="day-image" src="images/mahanakhon.jpg" alt="像素大楼日落" width="1200" height="800" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             </div>
           </div>
           <div class="day-section">
-            <h5>🕐 18:30-20:00 — 晚餐 Silom Soi Convent 排档街</h5>
+            <h5>🕐 18:00-19:30 — 晚餐 Northeast（实测推荐）</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>从像素大楼步行/Grab 约 10 分钟到 <strong>Silom Soi Convent</strong>（近 BTS Sala Daeng）——曼谷白领下班食堂一条街，午市 11:00 起、晚市 17:00 起。必吃泰式东北菜三件套 + 冬阴功：<strong>泰式烤鸡（Gai Yang）、凉拌木瓜沙拉（Som Tum）、碳烤猪颈肉（Kor Moo Yang）、冬阴功汤（Tom Yum Goong）</strong>。街上名店：<strong>Hai Som Tam Convent</strong>（专营宋丹，4.2 分/千余评价）、<strong>Khao-Sō-i</strong>（泰式创意菜，4.8 分）。三人点一桌人均 200-400 泰铢。</p>
-            <img class="day-image" src="images/yaowarat.jpg" alt="曼谷夜街烟火气" onclick="openLightbox(this.src)" loading="lazy">
+            <p>✅ 实测推荐：直接去 <strong>Northeast</strong>（大众点评必吃榜第三），难得的一家很好吃、几乎不踩坑的泰国菜餐厅。我们工作日晚上去门口也就微微排 1-2 队、高峰期等位约 15 分钟，<strong>值得等待</strong>。<strong>点菜口诀：按大众点评「推荐/点赞榜」从上往下，遇到想吃想喝的无脑点就行</strong>，基本不会错。特别推荐 <strong>大西瓜冰沙</strong>——又冰爽又好看，拍照和口感都拉满。</p>
+            <picture>
+  <source srcset="images/yaowarat.webp" type="image/webp">
+  <img class="day-image" src="images/yaowarat.jpg" alt="东北菜餐厅" width="1400" height="1050" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
-            <h5>🕐 20:00 — 回酒店休息</h5>
-            <p>吃完排档 Grab 回酒店（约 15 分钟）。今天运动量不小，早点休息，明天恰图恰+泰拳+天台，还要继续拼。</p>
+            <h5>🕐 19:30-20:30 — 回酒店 + 洗澡</h5>
+            <p>吃完排档 Grab 回酒店（约 15 分钟），冲个澡、<strong>洗得干干净净</strong>——逛了一天身上黏糊糊，清爽了再去按摩才舒服。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 20:30 — 酒店 SPA（实测强推）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：我们当天不累，就把 SPA 挪到了<strong>晚上洗完澡后</strong>，直接约了<strong>酒店自己的 SPA</strong>——虽然比外面连锁贵一些，但<strong>体验和仪式感超强</strong>：师傅每一步都会清洁、手法超级专业。✅ <strong>强烈推荐第一次做泰式马杀鸡选 2 小时</strong>，彻底放松，做完直接回房睡觉。</p>
+            <p>⚠️ <strong>前提说明：不是每家酒店都有 SPA</strong>——我们全程订的是五星级酒店所以都有。如果你住的酒店没有 SPA，就去外面正规连锁店（如 <strong>Health Land</strong>、<strong>Let's Relax</strong>），泰国这两家遍地都是、口碑稳定，同样能享受到专业的泰式按摩。</p>
+            <picture>
+  <source srcset="images/thai-massage.webp" type="image/webp">
+  <img class="day-image" src="images/thai-massage.jpg" alt="酒店 SPA 泰式按摩" width="1400" height="933" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="tip-block">
-            <strong>🏖️ 度假小贴士：</strong>今天是行程最满的一天，靠「早起冲大皇宫 + 中午避暑 + 下午按摩回血」三段节奏扛下来。如果有人上午不想去大皇宫，可以睡到自然醒中午直 ICONSIAM 汇合。
+            <strong>🏖️ 度假小贴士：</strong>今天是行程最满的一天，靠「早起冲大皇宫 + 中午避暑 + 傍晚日落 + 晚上 SPA 收尾」的节奏扛下来。如果有人上午不想去大皇宫，可以睡到自然醒中午直 ICONSIAM 汇合。
           </div>
         </div>
       </div>
@@ -1072,18 +1139,18 @@ body {
     <!-- Day 3 -->
     <div class="timeline-item" id="day3">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">03</div>
             <div class="day-date">10月3日 周六</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
-            <div class="day-title">曼谷 · 恰图恰周末市场+真·泰拳+天台酒吧</div>
+          <div class="day-header-main">
+            <div class="day-title">曼谷 · 水门寺大佛+恰图恰周末市场+朋友聚餐（Saxophone）</div>
             <div class="tag-row">
+              <span class="tag tag-photo">大佛</span>
               <span class="tag tag-city">市场</span>
               <span class="tag tag-food">美食</span>
-              <span class="tag tag-action">泰拳</span>
               <span class="tag tag-night">夜生活</span>
             </div>
           </div>
@@ -1091,62 +1158,86 @@ body {
         </div>
         <div class="timeline-detail">
           <div class="day-section">
-            <h5>🕐 09:00 — 起床 + 早餐（今天可以晚点）</h5>
-            <p>昨天走累了，今天睡到自然醒。酒店不含早餐，几个选择：</p>
+            <h5>🕐 08:00 — 起床 + 早餐（早起点，先看大佛）</h5>
+            <p>✅ 实测：今天特意<strong>早起了 1 小时</strong>，赶在恰图恰之前先去看水门寺金色大佛。酒店不含早餐，几个选择：</p>
             <ul>
-              <li><strong>楼下速食</strong>：7-11 / 路边摊，打抛饭、鸡饭、豆浆油条，50-100 泰铢。</li>
+              <li><strong>楼下速食</strong>：7-Eleven / 路边摊，打抛饭、鸡饭、豆浆油条，50-100 泰铢。</li>
               <li><strong>顺路打卡</strong>：坐 BTS 时提前一站，去中央世界/商场美食广场吃碗热汤米粉（40-80 泰铢）。</li>
               <li>恰图恰市场里也有小吃可以边走边吃，留着胃。</li>
             </ul>
           </div>
           <div class="day-section">
-            <h5>🕐 10:00 — 出发去恰图恰（BTS）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ BTS 换乘约 30-40 分钟</span></div>
-            <p>从 Ratchadamri 站坐 BTS（Silom 线转 Sukhumvit 线）到 <strong>Mo Chit 站</strong>，跟人流走 5 分钟就是入口。今天恰逢周六——亚洲最大周末市场开市！</p>
+            <h5>🕐 09:00 — 出发去水门寺（金色大佛）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-30 分钟</span></div>
+            <p>Grab 打车去 <strong>水门寺（Wat Paknam 大白塔寺）</strong>，看<strong>金色大佛</strong>——曼谷近年爆火的新地标，64 米高金色坐佛，庄严肃穆，拍照很出片，人比大皇宫少很多。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 10:40-14:30 — 恰图恰周末市场（约 4 小时）</h5>
+            <h5>🕐 09:30-10:30 — 水门寺看金色大佛（约 1 小时）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>看完大佛，在寺里拍拍照。⚠️ 进寺庙注意着装（过膝、不露肩），保持安静。</p>
+            <picture>
+  <source srcset="images/wat-paknam.webp" type="image/webp">
+  <img class="day-image" src="images/wat-paknam.jpg" alt="水门寺金色大佛" width="1279" height="1706" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+          </div>
+          <div class="day-section">
+            <h5>🕐 10:30 — 打车去恰图恰</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 车程约 20-30 分钟</span></div>
+            <p>水门寺出来 Grab 打车（或 BTS 转乘）去 <strong>恰图恰周末市场（Mo Chit 站一带）</strong>。今天恰逢周六——亚洲最大周末市场开市！</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 11:00-15:00 — 恰图恰周末市场（约 4 小时）</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 4 小时</span><span class="meta-hard">🏖️ 暴走段</span></div>
-            <p>15000 个摊位，大到 GPS 都没用。三人分工：一人找吃、一人砍价、一人挑货。必买：泰国本土潮牌 T 恤（150-300 泰铢）、手工皮具、泰拳短裤、复古太阳镜。市场内椰子冰淇淋、烤猪肉串随走随吃。⚠️ 中午最热，逛到 14:30 收工回酒店回血。</p>
+            <p>15000 个摊位，大到 GPS 都没用。三人分工：一人找吃、一人砍价、一人挑货。必买：泰国本土潮牌 T 恤（150-300 泰铢）、手工皮具、泰拳短裤、复古太阳镜。市场内椰子冰淇淋、烤猪肉串随走随吃。⚠️ 中午最热，逛到 15:00 收工回酒店回血。</p>
+            <picture>
+  <source srcset="images/chatuchak.webp" type="image/webp">
+  <img class="day-image" src="images/chatuchak.jpg" alt="恰图恰周末市场" width="1320" height="982" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+          </div>
+          <div class="day-section">
+            <h5>🕐 15:00-15:40 — 回酒店（BTS/Grab）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 40 分钟</span></div>
+            <p>原路返回。逛完一身汗，回酒店冲澡回血。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 15:40-18:00 — 酒店冲澡 + 休息（关键回血）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>冲个澡、换身衣服，躺床上或泡酒店泳池半小时。这段休息是今天的关键——不休息晚上喝酒聚餐会撑不住。💡 不困想动的话，酒店就在 CentralWorld / Big C 旁边，下楼逛逛、顺手把伴手礼踩个点也不错。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 18:30 — 打车出发 Saxophone，早去占靠舞台的位</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-25 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：白天泰拳赛没订到票，就顺延到了 7 号晚上；今天正好在泰国遇到了<strong>两个朋友</strong>，约晚上一起吃饭+喝酒。🥂 <strong>鼎力推荐 Saxophone Pub &amp; Restaurant</strong>。这家店小有名气、<strong>本地人很多</strong>，<strong>不用预约、到场现场选座</strong>；想坐<strong>靠近舞台的好位置</strong>，建议 <strong>18:00 左右就出发</strong>（我们 18:30 打车去的），早到早占位。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 19:00-23:00 — Saxophone 爵士酒吧（吃饭+几轮酒）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 4 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：这家我们吃+喝了几轮酒，一直 high 到 23:00 才打车回酒店，氛围超棒。详见下方详细信息。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/siam-shopping.jpg" alt="恰图恰市场" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/thai-boat-noodle.jpg" alt="市场小吃" onclick="openLightbox(this.src)" loading="lazy">
+              <picture>
+  <source srcset="images/saxophone1.webp" type="image/webp">
+  <img class="day-image" src="images/saxophone1.jpg" alt="Saxophone 爵士酒吧" width="1317" height="982" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/saxophone2.webp" type="image/webp">
+  <img class="day-image" src="images/saxophone2.jpg" alt="Saxophone 爵士酒吧现场" width="1320" height="993" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             </div>
           </div>
-          <div class="day-section">
-            <h5>🕐 14:30-15:10 — 回酒店（BTS）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 40 分钟</span></div>
-            <p>BTS 原路返回。逛完一身汗，回酒店冲澡。</p>
+          <div class="tip-block">
+            <strong>🎷 Saxophone Pub &amp; Restaurant（实测鼎力推荐）：</strong>
+            <ul>
+              <li><strong>类型</strong>：曼谷老牌爵士/蓝调音乐酒吧，现场乐队每天演出，是听爵士 live 的经典去处</li>
+              <li><strong>氛围</strong>：昏暗灯光 + 现场爵士乐，本地人和外国游客都爱来，适合和朋友边吃边喝边听歌</li>
+              <li><strong>消费</strong>：有正餐也有酒水，边吃边点几轮酒，人均丰俭由人（我们几个人吃+喝了几轮，体验很好）</li>
+              <li><strong>位置</strong>：近 Victory Monument（胜利纪念碑）一带，离恰图恰回城顺路</li>
+              <li><strong>💡 占位技巧</strong>：<strong>不用预约</strong>，到场现场选座；店小有名气、本地人多，建议 18:00 左右早点去占<strong>靠近舞台的好位置</strong>，晚上越晚越热闹、好位置越难抢</li>
+              <li>💡 适合三五好友聚会的场子，比单纯的天台酒吧更有"音乐+酒+聊天"的氛围</li>
+            </ul>
           </div>
           <div class="day-section">
-            <h5>🕐 15:10-17:00 — 酒店冲澡 + 休息（关键回血）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>冲个澡、换身衣服，躺床上或泡酒店泳池半小时。这段休息是今天的关键——不休息晚上泰拳+天台会撑不住。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 17:00-17:30 — 出发去 Rajadamnern 拳馆</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-25 分钟</span></div>
-            <p>Grab 前往 Rajadamnern Stadium（老城区考山路附近）。门票建议 Klook 提前订，一等座 2000 泰铢/人。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 18:00-21:00 — 真·泰拳现场（约 3 小时）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>曼谷最老牌拳场，每周六顶级赛事，18:00 开始约 8-9 场。现场赌注声、助威嘶吼、骨肉撞击声，比电视震撼 10 倍。二等座 1500 泰铢就能看很清楚。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 21:00-21:30 — 转场天台酒吧</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-25 分钟</span></div>
-            <p>泰拳散场后 Grab 去素坤逸的天台酒吧。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 21:30-23:00 — 曼谷天台酒吧（Rooftop）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>推荐 <strong>Octave Rooftop</strong>（素坤逸万豪酒店：45 楼是 Lounge &amp; Bar 可吃饭，48 楼 Sky Bar 有 DJ，360 度无遮挡，鸡尾酒约 490 泰铢+服务费，<strong>有着装要求，勿穿短裤拖鞋</strong>）或 <strong>Tichuca Rooftop Bar</strong>（巨型 LED 水母树，T-One 大楼 46 楼，人均约 400-600 泰铢，<strong>需带护照入场，日落时段常排队</strong>）。三人点一轮酒，俯瞰曼谷夜景。</p>
-            <img class="day-image" src="images/bangkok-skyline.jpg" alt="曼谷天台夜景" onclick="openLightbox(this.src)" loading="lazy">
-          </div>
-          <div class="day-section">
-            <h5>🕐 23:00 — 顺路宵夜 + 回酒店</h5>
-            <p>楼下素坤逸 Soi 38 深夜路边摊来碗泰式打抛饭（人均 60-100 泰铢），然后 Grab 回酒店休息。明天要换城市去芭提雅，别熬太晚。</p>
+            <h5>🕐 23:00 — 打车回酒店休息</h5>
+            <p>high 到 23:00 左右 Grab 打车回酒店。明天就要换城市去芭提雅了，别熬太晚。</p>
           </div>
         </div>
       </div>
@@ -1155,13 +1246,13 @@ body {
     <!-- Day 4 -->
     <div class="timeline-item" id="day4">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">04</div>
             <div class="day-date">10月4日 周日</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
+          <div class="day-header-main">
             <div class="day-title">曼谷 → 芭提雅 · 真理寺+悬崖日落+步行街</div>
             <div class="tag-row">
               <span class="tag tag-photo">拍照</span>
@@ -1175,46 +1266,89 @@ body {
         </div>
         <div class="timeline-detail">
           <div class="day-section">
-            <h5>🕐 08:00 — 起床 + 早餐 + 退房</h5>
-            <p>今天换城市去芭提雅。酒店不含早餐，楼下 7-11/路边摊（或水门市场红大哥鸡饭，若前两天没吃上）解决，<strong>打包行李、办理退房</strong>。退房时把不用的厚衣物塞行李箱。</p>
+            <h5>🕐 自然醒 — 起床 + 早餐</h5>
+            <p>今天换城市去芭提雅，<strong>不用早起</strong>。睡到自然醒，楼下 7-Eleven 或路边摊解决早餐。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 09:00 — 包车出发去芭提雅</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 车程约 2 小时</span></div>
-            <p><strong>三人包一辆车</strong>（SUV/轿车约 1500-2500 泰铢/车，3 人分摊人均约 100-170 元人民币），酒店接送、门对门，比大巴舒服。车上补个觉或刷手机。</p>
+            <h5>🕐 上午 — 酒店泳池/娱乐层放松</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 随意</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测关键：<strong>泰国酒店一般 15:00 才能办入住</strong>，去太早也进不了房。如果酒店不错，上午就在<strong>泳池或娱乐层</strong>放松——游游泳、玩玩 PS5 或小游戏，把时间舒服地耗掉。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 11:30 — 回房收拾行李</h5>
+            <p>回房间收拾、打包行李，把不用的厚衣物塞行李箱。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 12:00 — 卡点退房</h5>
+            <p><strong>卡 12:00 准时退房</strong>（别太早退，也别超时被加钱）。退房后去楼下 <strong>7-Eleven 买个午饭</strong>带着路上吃。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 12:30 — 打车/包车出发去芭提雅</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 车程约 2 小时多</span></div>
+            <p><strong>三人包一辆车</strong>（SUV/轿车约 1500-2500 泰铢/车，3 人分摊人均约 500-850 泰铢（约 100-170 元）），门对门比大巴舒服，车上吃午饭、补觉或刷手机。</p>
             <p>📌 <strong>包车怎么找（防坑要点）</strong>：优先 <strong>Klook/KKday 提前订</strong>（人民币直付、含高速费、有客服），或 <strong>Grab 现场叫</strong>（价锁定、最防宰）。<strong>别坐机场/路边拉客的车</strong>（开价 2-3 倍），<strong>别用突突车跑长途</strong>。上车前问清：<strong>按车不按人、含高速费、点到点接送、有无等时费</strong>。详见下方「包车与打车防坑」板块。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 11:00 — 抵达 Holiday Inn Pattaya</h5>
-            <p>办理入住、放行李。海滨路北段面海，先到房间把泳装、防晒拿出来，换上清凉装扮。</p>
+            <h5>🕐 15:00-16:15 — 抵达 Holiday Inn Pattaya，入住 + 简单休整</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 车程 2 个多小时，<strong>15:00 左右到店</strong>，正好办入住。放行李、简单歇口气、补涂防晒，换个清凉装扮。</p>
+            <p>💡 <strong>酒店正对芭提雅唐人街</strong>：楼下中餐厅、美食、按摩店超多，这几天想吃中餐、换口味、或懒得跑远，下楼就有，很方便。</p>
+            <picture>
+  <source srcset="images/holiday-inn-pattaya.webp" type="image/webp">
+  <img class="day-image" src="images/holiday-inn-pattaya.jpg" alt="芭提雅假日酒店" width="733" height="550" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+          </div>
+          <div class="tip-block">
+            <strong>⚠️ 关于今天去真理寺（先看这条，别白跑）：</strong>真理寺在芭提雅<strong>北边 Naklua</strong>，而今天的日落餐厅在<strong>南边帕塔纳克山（Pratamnak Hill）</strong>——两地横穿整个芭提雅市区，<strong>单程 35-45 分钟</strong>。15:00 才入住，再跑真理寺（含往返车程 + 游览 1.5 小时）会直接挤掉日落，<strong>「今天 + 今天」两个都要，物理上跑不动</strong>。<br>
+            ✅ <strong>二选一（推荐 A）：</strong><br>
+            <strong>A（推荐）</strong>：今天放弃真理寺，酒店放好行李后<strong>就近去芭提雅海滩 / 酒店泳池</strong>休息 1 小时，<strong>16:30 出发去悬崖餐厅</strong>占看日落的位，从容不赶。<br>
+            <strong>B</strong>：想去真理寺，那就<strong>把它挪到 Day6 上午</strong>（那天本来就是躺平日），今天彻底休闲。<br>
+            <em>（原方案「15:30-17:00 真理寺 → 17:00 出发去悬崖」确实赶不上日落，已调整。）</em>
           </div>
           <div class="day-section">
-            <h5>🕐 11:30-12:30 — 海边午餐</h5>
-            <p>酒店周边 Beach Road 沿路都是餐厅，挑一家面海的吃简餐：泰式炒粉、菠萝饭配冰椰子。人均 150-250 泰铢。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 13:00-15:00 — 真理寺（Sanctuary of Truth）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
-            <p>从酒店坐双条车/Grab 约 10 分钟到真理寺（门票 500 泰铢）。全木雕刻海边神殿，整栋建筑没有一颗钉子，高 105 米面朝大海，精雕细琢震撼。⚠️ 有小段施工区，按要求戴安全帽。</p>
+            <h5>🕐 16:15-16:45 — 自由安排：海边散步 / 酒店泳池（备选：真理寺见上方说明）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 30 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>今天不赶真理寺的话，这段就是在酒店 / 海滩缓一缓：楼下海滨路散散步、在泳池泡一下、或直接补个觉。到点出发去看日落就行。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/sanctuary-of-truth.jpg" alt="真理寺" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/sanctuary-detail.jpg" alt="真理寺木雕细节" onclick="openLightbox(this.src)" loading="lazy">
+              <picture>
+  <source srcset="images/sanctuary-of-truth.webp" type="image/webp">
+  <img class="day-image" src="images/sanctuary-of-truth.jpg" alt="真理寺" width="1200" height="800" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/sanctuary-detail.webp" type="image/webp">
+  <img class="day-image" src="images/sanctuary-detail.jpg" alt="真理寺木雕细节" width="1400" height="935" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             </div>
           </div>
           <div class="day-section">
-            <h5>🕐 15:00-16:30 — 回酒店休整 + 换装</h5>
-            <p>回酒店冲个澡、换身晚上看日落的衣服。想游泳的去泳池泡一下。</p>
-          </div>
-          <div class="day-section">
             <h5>🕐 16:30-17:00 — 前往悬崖餐厅</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-25 分钟</span></div>
-            <p>Grab 去 <strong>The Sky Gallery</strong> 悬崖餐厅（芭提雅最经典的看日落餐厅，位于帕塔纳克山）。<strong>一定提前一天订 17:00 的看海落日位</strong>——建议通过 Line 官方号（lin.ee/jRQusxY）预订，靠海位置很抢手。</p>
+            <div class="day-meta"><span class="meta-time">⏱️ Grab 约 20-25 分钟（预留堵车）</span></div>
+            <p>Grab 去 <strong>The Sky Gallery</strong> 悬崖餐厅（芭提雅最经典的看日落餐厅，位于帕塔纳克山）。<strong>建议 16:30 前出发</strong>，路上会堵，早点到占好位置、从容点单。</p>
+            <div class="tip-block">
+              <strong>📞 悬崖餐厅好座位预订（实测）：</strong>
+              <ul>
+                <li><strong>好座位（看海落日位）必须提前预约</strong>——通过 <strong>Line 官方号（lin.ee/jRQusxY）或电话</strong>预订，靠海位置很抢手。</li>
+                <li>只有一两个人的话，也可以<strong>早点到现场订位</strong>——但<strong>建议尽量线上联系</strong>，更稳妥。</li>
+                <li><strong>定金约 1500 泰铢（约 300 元人民币）</strong>，<strong>直接抵扣餐费</strong>；如果没消费完<strong>不退</strong>，点菜时尽量点够金额。</li>
+                <li><strong>提前一天就能订到位置</strong>，不用太早担心。</li>
+                <li>⚠️ <strong>取消政策</strong>：定金通常<strong>不可退、不可改期</strong>（临时不去 = 损失 1500 泰铢）。同一天若遇暴雨，先打电话问能否改期，别直接不去。</li>
+              </ul>
+            </div>
           </div>
           <div class="day-section">
-            <h5>🕐 17:00-19:00 — 悬崖日落晚餐（约 2 小时）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>悬崖上吃海鲜大餐看天边渐变色，人均 400-700 泰铢。10 月日落约 18:00，吃完刚好看完整个落日过程。</p>
-            <img class="day-image" src="images/pattaya-sunset.jpg" alt="芭提雅日落" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🕐 17:20-19:00 — 悬崖日落晚餐（约 1.5 小时）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>悬崖上吃海鲜大餐看天边渐变色，人均 400-700 泰铢。10 月日落约 18:00，边吃边看完整落日过程。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/sky-gallery-1.webp" type="image/webp">
+  <img class="day-image" src="images/sky-gallery-1.jpg" alt="悬崖餐厅日落" width="1280" height="1707" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/sky-gallery-2.webp" type="image/webp">
+  <img class="day-image" src="images/sky-gallery-2.jpg" alt="悬崖餐厅晚餐" width="1400" height="1050" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
             <h5>🕐 19:00-19:30 — 前往 Walking Street</h5>
@@ -1222,12 +1356,26 @@ body {
             <p>Grab 去芭提雅步行街南端入口。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 19:30-23:00 — 芭提雅步行街（Walking Street）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 随缘</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>芭提雅 500 米核心夜生活区，霓虹密度全球数一数二。三人先沿街走一两个来回感受氛围，再选一家现场乐队酒吧——推荐 <strong>Hot Tuna Bar</strong>（摇滚现场，营业至凌晨 03:30）或 <strong>Lucifer Entertainment</strong>（步行街工业风夜店，通宵营业）。路上拉客的多，<strong>不想去就微笑说 "No thanks"</strong>。啤酒 80-130 泰铢/瓶。</p>
+            <h5>🕐 19:30-21:00 — 芭提雅步行街（Walking Street）【快速逛一圈即可】</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 快逛半小时、慢逛 1 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：步行街<strong>其实不大</strong>，慢逛约 1 小时、快逛半小时左右就逛完一圈了，主要是感受霓虹和热闹氛围。⚠️ <strong>里面的店基本都别进</strong>——感觉都挺乱的，沿街走一圈看看就够了。</p>
+            <picture>
+  <source srcset="images/walking-street.webp" type="image/webp">
+  <img class="day-image" src="images/walking-street.jpg" alt="芭提雅步行街" width="1320" height="979" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             <div class="tip-block">
-              <strong>⚠️ 实用提醒：</strong>手机钱包放前裤兜，有人递菜单直接不理。路边突突车开价巨高，坚持用 Grab。二楼以上的 Gogo Bar 进去前问清楚酒水价格，有些有最低消费。最晚别喝到断片就行。
+              <strong>⚠️ 步行街实用提醒：</strong>手机钱包放前裤兜，有人递菜单/拉客直接不理，微笑说 "No thanks" 即可。路边突突车开价巨高，坚持用 Grab。
             </div>
+          </div>
+          <div class="day-section">
+            <h5>🕐 21:00 — 走回酒店看夜生活，或 Grab 回</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 30-40 分钟（走）</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：出了步行街，可以<strong>慢慢走回酒店</strong>，一路顺便看看芭提雅的海滨路夜生活；如果不想走、或酒店比较远，<strong>直接 Grab 回</strong>也完全 OK。</p>
+            <p>💡 交通建议：<strong>双条车除非固定路线，否则全程用 Grab 就行</strong>——省得讲价、也心里踏实。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 21:30 — 早点回酒店休息</h5>
+            <p>✅ <strong>早点回酒店休息</strong>——明天要 <strong>7 点早起</strong>赶轮渡去格兰岛，别熬太晚。</p>
           </div>
         </div>
       </div>
@@ -1236,13 +1384,13 @@ body {
     <!-- Day 5 -->
     <div class="timeline-item" id="day5">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">05</div>
             <div class="day-date">10月5日 周一</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
+          <div class="day-header-main">
             <div class="day-title">格兰岛一日游 · 果冻海+水上项目+蒂芬妮秀</div>
             <div class="tag-row">
               <span class="tag tag-beach">海岛</span>
@@ -1257,54 +1405,110 @@ body {
         <div class="timeline-detail">
           <div class="day-section">
             <h5>🕐 07:30 — 起床 + 早餐</h5>
-            <p>今天要去格兰岛，早点起。酒店不含早餐，附近这样解决：</p>
-            <ul>
-              <li><strong>地道：海滨路清晨米粉汤摊</strong>（40-70 泰铢）——Holiday Inn 楼下 Beach Road 两侧巷口，清早 6:30-9:00 看到排队本地人的摊子就是，猪肉/鸡肉米粉汤、粥、油条豆浆，最接地气。</li>
-              <li><strong>稳妥：Central Festival 购物中心内星巴克/咖啡店 + 烘焙</strong>（步行约 10-15 分钟，150-250 泰铢），赶时间或口味保守选这个。</li>
-            </ul>
-            <p>涂好防晒（海边当天要补涂 2-3 次），带好泳裤、防水袋、相机。行李放酒店，只带随身小包。</p>
+            <p>今天要去格兰岛，7 点早起。早餐<strong>直接楼下 7-Eleven 解决</strong>，又快又省事。涂好防晒（海边当天要补涂 2-3 次），带好泳裤、防水袋、相机。行李放酒店，只带随身小包。</p>
           </div>
           <div class="day-section">
             <h5>🕐 08:15-08:45 — 前往 Bali Hai 码头</h5>
             <div class="day-meta"><span class="meta-time">⏱️ Grab/双条车约 15-20 分钟</span></div>
-            <p>从 Holiday Inn 到 Bali Hai 码头坐双条车（10 泰铢/人）或 Grab。赶 09:00 的轮渡。</p>
+            <p>从 Holiday Inn 到 Bali Hai 码头坐双条车或 Grab。赶 09:00 的轮渡。</p>
+            <picture>
+  <source srcset="images/bali-hai-pier.webp" type="image/webp">
+  <img class="day-image" src="images/bali-hai-pier.jpg" alt="Bali Hai 码头" width="1320" height="945" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
             <h5>🕐 09:00-09:45 — 轮渡去格兰岛（Koh Larn）</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 45 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>Bali Hai 码头轮渡 30 泰铢/人。三人也可以包快艇（2000-3000 泰铢/船，20 分钟达，可分摊），更快。目的地 Tawaen Beach 或 Samae Beach。</p>
+            <p>Bali Hai 码头轮渡 <strong>40 泰铢/人</strong>，<strong>停靠 Tawaen Beach 沙滩</strong>。回程建议体验 <strong>快艇</strong>（约 150 泰铢票价，人满发船，可坐船尾看日落）。</p>
+          </div>
+          <div class="tip-block">
+            <strong>🚨 格兰岛防坑（务必看）：岛上的「水上项目套票」全不要订！</strong>
+            <ul>
+              <li><strong>想玩哪个，单独跟老板商量</strong>，别直接按牌子原价报。</li>
+              <li>牌子上写的价格<strong>至少能砍到 4 折</strong>——比如 4 项套票（摩托艇+拖拽伞+香蕉船+人造浮潜）标 1800 泰铢（约 360 元），<strong>可以砍到 800 泰铢</strong>。</li>
+              <li><strong>套票的坑</strong>：摩托艇、拖拽伞、香蕉船单项目体验时间只有 <strong>1-2 分钟</strong>，而且摩托艇还是<strong>老板开、你坐前面</strong>，带你遛一圈就结束了，体验大打折扣。</li>
+              <li>实在嫌麻烦只想快速体验，再报个廉价的拖拽伞+摩托艇+香蕉船+人造浮潜套票；否则<strong>真心建议单独谈</strong>，体验完全不一样。</li>
+            </ul>
           </div>
           <div class="day-section">
-            <h5>🕐 09:45-12:30 — 海滩时光 + 水上项目（约 3 小时）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
-            <p><strong>Tawaen Beach</strong> 最热闹，白沙碧水，水上项目多（拖曳伞 500-800 泰铢、香蕉船 300-400 泰铢、摩托艇 800-1200 泰铢）。<strong>Samae Beach</strong> 更安静，适合拍照浮潜，水质更好。三个人可以拖曳伞轮流飞。</p>
+            <h5>🕐 10:00-12:00 — Tawaen 沙滩躺平/游泳（约 2 小时）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>✅ 实测：上岛后约 10 点，到 Tawaen 沙滩找个好位置<strong>每人租张椅子</strong>，躺两小时或下海游泳玩水——<strong>水很清、白沙清水很漂亮</strong>，躺到 12 点顺便补补觉。上岸就有浴室，<strong>40 泰铢洗一次澡（约 8 元）</strong>。这里也适合谈项目，<strong>但只推荐玩拖拽伞</strong>。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/koh-larn-beach1.jpg" alt="格兰岛码头水屋" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/koh-larn-sea.jpg" alt="格兰岛果冻海" onclick="openLightbox(this.src)" loading="lazy">
+              <picture>
+  <source srcset="images/tawaen-beach.webp" type="image/webp">
+  <img class="day-image" src="images/tawaen-beach.jpg" alt="Tawaen 沙滩" width="1280" height="714" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/parasailing.webp" type="image/webp">
+  <img class="day-image" src="images/parasailing.jpg" alt="拖拽伞" width="1280" height="2276" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             </div>
           </div>
           <div class="day-section">
-            <h5>🕐 12:30-13:30 — 岛上餐厅午餐</h5>
-            <p>海滩边海鲜大排档，现捞现烤，人均 200-400 泰铢。推荐烤鱿鱼、泰式炒粉、新鲜椰子。</p>
+            <h5>🕐 12:00-12:30 — 7-Eleven 解决中饭 + 租摩托车</h5>
+            <p>✅ 实测：中饭<strong>直接在 7-Eleven 解决</strong>（岛上东西贵，7-Eleven 最省心）。然后<strong>租一辆摩托车</strong>——岛上海滩之间距离有点远，租车很方便；价格按<strong>动力和载人数</strong>不同，一台还是多台自己决定，<strong>可以跟老板谈到 5 点还车</strong>。</p>
+            <div class="tip-block">
+              <strong>🛵 岛上骑摩托安全提醒（务必看）：</strong>
+              <ul>
+                <li><strong>必须戴头盔</strong>——岛上主路有交警查，没戴会罚款；租车时让老板配齐，并<strong>拍照记录车身既有划痕</strong>，还车时免得被扣钱。</li>
+                <li><strong>驾照问题</strong>：泰国要求国际驾照（IDP）或泰国驾照。持中国驾照骑摩托<strong>一旦出事故，保险基本不赔</strong>，还要自负赔偿。没把握就别自己骑。</li>
+                <li><strong>路况</strong>：岛上有连续上下坡 + 急弯，靠左行驶（和国内相反），雨后路面滑。<strong>新手 / 不熟练千万别上</strong>。</li>
+                <li>✅ <strong>更稳的替代</strong>：三个人合租一台车由最熟练的人开（慢速），或<strong>直接坐岛上的双条车/让酒店安排环岛</strong>，一样能逛完 Tien / Samae / Naul 三个沙滩，还不用担责。</li>
+              </ul>
+            </div>
           </div>
           <div class="day-section">
-            <h5>🕐 13:30-16:30 — 下午拍照 & 玩到返程</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 约 3 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
-            <p>Tien Beach 或 Nual Beach 人少景美，果冻海 + 白沙 + 椰林，随手一拍都是明信片。<strong>坐 16:30 左右的船回来</strong>，不要搭末班（18:00），留够时间回酒店冲澡。⚠️ 防晒提前补涂！岛上储物柜约 50 泰铢。</p>
-            <img class="day-image" src="images/pattaya-beach.jpg" alt="芭提雅海滩椰林" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🕐 12:30-14:00 — 骑摩托逛 Tien 沙滩 → Samae 沙滩</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 1.5 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>✅ 实测：先开车到 <strong>Tien 沙滩</strong> 逛逛玩玩，再去 <strong>Samae 沙滩</strong>——这两个沙滩<strong>离得近</strong>，玩到差不多 2 点。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/tien-beach.webp" type="image/webp">
+  <img class="day-image" src="images/tien-beach.jpg" alt="Tien 沙滩" width="1280" height="1080" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/samae-beach.webp" type="image/webp">
+  <img class="day-image" src="images/samae-beach.jpg" alt="Samae 沙滩" width="1280" height="972" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
-            <h5>🕐 16:30-17:30 — 返程 + 回酒店冲澡</h5>
-            <p>轮渡回芭提雅（约 45 分钟），Grab 回酒店，冲澡换衣服准备看秀。</p>
+            <h5>🕐 14:00-16:30 — Naul 沙滩躺平 + 玩摩托艇/香蕉船</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 2.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：开车去 <strong>Naul 沙滩</strong>，租张椅子放下东西继续躺。<strong>强烈推荐在这里玩香蕉船和摩托艇</strong>——<strong>摩托艇一个人自己开，1200 泰铢能开 30 分钟</strong>（约 240 元，比国内性价比高很多），而且这片海滩比较远、<strong>海面上基本没人，随便开超级爽</strong>；香蕉船更便宜（没问价，应该不贵）。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/naul-beach.webp" type="image/webp">
+  <img class="day-image" src="images/naul-beach.jpg" alt="Naul 沙滩" width="1279" height="1676" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/jetski.webp" type="image/webp">
+  <img class="day-image" src="images/jetski.jpg" alt="摩托艇" width="1275" height="941" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
+            <picture>
+  <source srcset="images/banana-boat.webp" type="image/webp">
+  <img class="day-image" src="images/banana-boat.jpg" alt="香蕉船" width="1280" height="2781" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
-            <h5>🕐 18:30-19:00 — 前往剧场 + 简单晚餐</h5>
-            <p>Tiffany's Show 剧场在<strong>芭提雅二路（Second Road），紧邻 Terminal 21 航站楼商场</strong>，从步行街一带过去约 10-15 分钟（双条车/Grab）。沿途顺路吃个快餐果腹。</p>
+            <h5>🕐 16:30 — 开车回 Tawaen 还摩托车，坐快艇返回</h5>
+            <p>✅ 实测：差不多 16:30 开车回 Tawaen 还摩托，准备回酒店。<strong>回程建议体验快艇</strong>（约 150 泰铢票价，人满发船）——<strong>问清楚哪家快一点</strong>，可以坐船尾，差不多 5 点多能在海上看到日落。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 17:30-18:30 — 回酒店冲澡 + 麦当劳晚餐</h5>
+            <p>✅ 实测：回酒店洗完澡，出来<strong>去麦当劳吃</strong>——7-Eleven 吃太多也吃腻了，换换口味。</p>
+          </div>
+          <div class="day-section">
+            <h5>🕐 18:30-19:00 — 前往蒂芬妮剧场</h5>
+            <p>Tiffany's Show 剧场在<strong>芭提雅二路（Second Road），紧邻 Terminal 21 航站楼商场</strong>，从步行街一带过去约 10-15 分钟（双条车/Grab）。</p>
           </div>
           <div class="day-section">
             <h5>🕐 19:30-20:45 — Tiffany's Show 蒂芬妮秀</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 75 分钟</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>芭提雅最经典夜间表演，百老汇级别舞台灯光服装，华丽大秀无低俗感。推荐 <strong>19:30 场</strong>。门票 Klook 约 160 人民币/人（VIP 200）。🎟️ 提前 1 天 Klook 订。</p>
+            <p>芭提雅最经典夜间表演，百老汇级别舞台灯光服装，华丽大秀无低俗感。推荐 <strong>19:30 场</strong>。门票 Klook 约 800 泰铢/人（约 160 元，VIP 200 元）。🎟️ 提前 1 天 Klook 订。</p>
+            <p>✅ 性价比提示：如果更看重性价比，可以选隔壁的 <strong>阿克烈秀（Alcazar 阿尔卡萨秀）</strong>——同为芭提雅两大经典人妖秀之一，舞台舞美同样华丽，票价通常比蒂芬妮便宜，预算敏感的朋友选它更划算。</p>
           </div>
           <div class="day-section">
             <h5>🕐 20:45-23:00 — 散场 + 海滨放松</h5>
@@ -1320,14 +1524,14 @@ body {
     <!-- Day 6 -->
     <div class="timeline-item" id="day6">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">06</div>
             <div class="day-date">10月6日 周二</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
-            <div class="day-title">芭提雅 · 海滩躺平日（睡到自然醒+海鲜+日落）</div>
+          <div class="day-header-main">
+            <div class="day-title">芭提雅 · 海滩躺平+兰坡海鲜市场（睡到自然醒+海鲜）</div>
             <div class="tag-row">
               <span class="tag tag-beach">海滩</span>
               <span class="tag tag-food">美食</span>
@@ -1344,21 +1548,30 @@ body {
             <h5>🕐 约 10:00 — 睡到自然醒 + 海滨散步</h5>
             <div class="day-meta"><span class="meta-time">不用看表</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>今天是泰国最后一个完整日子，<strong>不设闹钟</strong>。起床后沿海滨路慢悠悠散步，找家咖啡馆看海发呆。在海滨路租一排沙滩椅（约 50 泰铢/张），叫几个椰子（30 泰铢/个）和冰啤酒，开始躺平。</p>
-            <img class="day-image" src="images/pattaya-beach.jpg" alt="芭提雅海滩躺平" onclick="openLightbox(this.src)" loading="lazy">
+            <picture>
+  <source srcset="images/pattaya-beach.webp" type="image/webp">
+  <img class="day-image" src="images/pattaya-beach.jpg" alt="芭提雅海滩躺平" width="1400" height="962" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
           </div>
           <div class="day-section">
             <h5>🕐 约 12:00-16:00 — 海滩 / 中天海滩（想呆多久呆多久）</h5>
             <div class="day-meta"><span class="meta-time">想呆多久呆多久</span><span class="meta-easy">🏖️ 轻松</span></div>
             <p>懒得动就在酒店泳池泡一下午；想换沙滩就坐双条车去<strong>中天海滩（Jomtien Beach）</strong>——比市区人少水更干净。路边摊买个泰式炒粉 60 泰铢边走边吃。</p>
             <div class="day-images-row">
-              <img class="day-image" src="images/koh-larn-beach2.jpg" alt="中天海滩" onclick="openLightbox(this.src)" loading="lazy">
-              <img class="day-image" src="images/tutu-beach.jpg" alt="海滩咖啡馆" onclick="openLightbox(this.src)" loading="lazy">
+              <picture>
+  <source srcset="images/koh-larn-beach2.webp" type="image/webp">
+  <img class="day-image" src="images/koh-larn-beach2.jpg" alt="中天海滩" width="1400" height="1050" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/tutu-beach.webp" type="image/webp">
+  <img class="day-image" src="images/tutu-beach.jpg" alt="海滩咖啡馆" width="1400" height="933" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
             </div>
           </div>
           <div class="day-section">
-            <h5>🕐 下午可选 — 真理寺（之前没去可补）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 1.5 小时</span><span class="meta-moderate">🏖️ 适中</span></div>
-            <p>Day 4 如果没去够，可以趁下午去补。全木雕神殿，面朝大海，人少时走一圈非常宁静。</p>
+            <h5>🕐 下午可选（推荐）— 真理寺（Day4 没去的，今天补上）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 1.5 小时 + 往返车程</span><span class="meta-moderate">🏖️ 适中</span></div>
+            <p>如果 Day4 为了赶日落放弃了真理寺，<strong>今天下午是最好的补课时间</strong>（行程最松的一天才放得下）。从酒店 Grab 去北边 Naklua 约 15 分钟，门票 500 泰铢。全木雕海边神殿、整栋无一颗钉子、高 105 米面朝大海，人少时走一圈非常宁静。⚠️ 有小段施工区，按要求戴安全帽；<strong>建议 16:00-17:00 去，光最柔、也不晒</strong>。</p>
           </div>
           <div class="day-section">
             <h5>🕐 17:30-20:00 — 兰坡海鲜市场 · 自购海鲜 + 找店加工（压轴大餐）</h5>
@@ -1371,7 +1584,7 @@ body {
               ③ <strong>先谈好加工费和做法再下锅</strong>：可指定<strong>白灼、清蒸、泰式辣炒、咖喱炒、炭烤、冬阴功煮、蒜香黄油</strong>等，不同海鲜配不同做法。<br>
               ④ <strong>坐等开吃</strong>：加工店一般就在市场边上，点几瓶冰啤酒或椰子，一桌海鲜配海风，就是最地道的吃法。
             </div>
-            <p><strong>💰 加工费行情</strong>：按重量或做法计，通常 <strong>20–100 泰铢/公斤</strong>（有说约 100 泰铢/公斤），按做法/每道菜单项约 <strong>20–150 泰铢</strong>；<strong>一整桌丰富的海鲜总加工费大约 300 泰铢</strong>（约 60 元人民币）。加上自购海鲜，<strong>三人一桌吃爽人均约 500–800 泰铢</strong>。</p>
+            <p><strong>💰 加工费行情</strong>：按重量或做法计，通常 <strong>20–100 泰铢/公斤</strong>（有说约 100 泰铢/公斤），按做法/每道菜单项约 <strong>20–150 泰铢</strong>；<strong>一整桌丰富的海鲜总加工费大约 300 泰铢</strong>（约 60 元）。加上自购海鲜，<strong>三人一桌吃爽人均约 500–800 泰铢</strong>。</p>
             <div class="tip-block">
               <strong>⚠️ 避坑要点（务必看）：</strong><br>
               • <strong>认准活海鲜</strong>：不新鲜/死的便宜也别买，容易被"调包"或吃坏肚子。<br>
@@ -1379,11 +1592,23 @@ body {
               • <strong>盯秤</strong>：称重时留意是否去皮、数字是否归零，避免短斤缺两。<br>
               • <strong>只挑明码标价的摊</strong>：没有标价的先问价，货比三家再买。<br>
               • <strong>别理路边主动拉客的"黑店"</strong>：自己进市场挑，加工只选市场内/入口旁的正规加工摊。<br>
+              • <strong>小心市场门口会说中文、主动带你选货的人</strong>（实测）——他们往往带你去有回扣的摊，<strong>能全程自己来就自己来</strong>。<br>
+              • <strong>提前选好加工店</strong>（实测）：去市场前先在点评/攻略里看好想去的加工店，别到了再抓瞎，避免被拉去别的店。<br>
               • <strong>想更省心</strong>：也可直接点加工店/市场内海鲜餐厅的成品套餐，但"自购+代加工"最便宜最新鲜。
             </div>
             <p><strong>⏰ 建议时段</strong>：<strong>下午去最好</strong>，海鲜最新鲜、选择最多；越晚好货越少、部分摊收工。市场白天营业（约清晨开市），你下午或傍晚到都行，但别拖到太晚。</p>
             <p><strong>🧾 参考必买</strong>：手臂粗的濑尿虾、活蹦乱跳的老虎虾、现开生蚝、花蟹/青蟹、鱿鱼。三人一桌摆满，自购+加工合计约 <strong>1,500–2,400 泰铢</strong>（人均 500–800）。</p>
-            <img class="day-image" src="images/seafood-market.jpg" alt="炭烤海鲜" onclick="openLightbox(this.src)" loading="lazy">
+            <p>✅ 实测点单参考（三人一桌）：我们挑了 <strong>2 只大青龙 + 7 只大皮皮虾 + 3 只兰花蟹 + 1 条石斑鱼</strong>，量刚好三人吃爽。照着这个量点，不容易点多或不够吃。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/seafood-market.webp" type="image/webp">
+  <img class="day-image" src="images/seafood-market.jpg" alt="海鲜市场挑货" width="1280" height="929" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/seafood-dinner.webp" type="image/webp">
+  <img class="day-image" src="images/seafood-dinner.jpg" alt="海鲜大餐成品" width="1280" height="1707" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
             <h5>🕐 20:00-23:00 — 芭提雅最后一夜</h5>
@@ -1397,17 +1622,18 @@ body {
     <!-- Day 7 -->
     <div class="timeline-item" id="day7">
       <div class="timeline-dot"></div>
-      <div class="timeline-card" onclick="toggleDay(this)">
+      <div class="timeline-card" onclick="toggleDay(this, event)">
         <div class="day-header">
           <div>
             <div class="day-num">07</div>
             <div class="day-date">10月7日 周三（最后一天）</div>
           </div>
-          <div style="flex:1; margin-left:14px;">
-            <div class="day-title">芭提雅 → 曼谷 · 购物扫货+告别按摩+深夜机场</div>
+          <div class="day-header-main">
+            <div class="day-title">芭提雅 → 曼谷 · 购物扫货+泰拳赛+深夜机场</div>
             <div class="tag-row">
               <span class="tag tag-transport">交通</span>
               <span class="tag tag-city">购物</span>
+              <span class="tag tag-action">泰拳</span>
               <span class="tag tag-food">美食</span>
             </div>
           </div>
@@ -1415,59 +1641,114 @@ body {
         </div>
         <div class="timeline-detail">
           <div class="day-section">
-            <h5>🕐 09:00-10:00 — 自然醒 + 早餐 + 退房</h5>
-            <p>最后一天睡到自然醒，出门吃早餐（酒店不含早，海滨路米粉汤摊或 Central Festival 咖啡店）。<strong>11:00 前退房，行李全部带走，不要寄存在芭提雅</strong>（曼谷是单程，折返回来拿行李要 4 小时，不现实）。行李装车，人+行李一起回曼谷。</p>
+            <h5>🕐 10:00-11:00 — 自然醒 + 早餐 + 退房</h5>
+            <p>最后一天睡到自然醒，出门吃早餐，<strong>11:00 前退房，行李全部带走，不要寄存在芭提雅</strong>（曼谷是单程，折返回来拿行李要 4 小时，不现实）。行李装车，人+行李一起回曼谷。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 11:00-13:00 — 包车回曼谷（行李随车）</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 车程约 2 小时</span></div>
-            <p><strong>三人包一辆车直接回曼谷市中心</strong>（SUV/轿车约 1500-2500 泰铢/车，<strong>行李全程放车上，不再折返</strong>）。目的地导航到 <strong>CentralWorld / 原酒店 Grande Centre Point Ratchadamri</strong> 一带。找车方式同 Day4：Klook/KKday 提前订 或 Grab 现场叫。</p>
+            <h5>🕐 12:00-15:00 — 包车回曼谷（行李随车）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 车程约 2-3 小时</span></div>
+            <p><strong>三人包一辆车直接回曼谷市中心</strong>（SUV/轿车约 1500-2500 泰铢/车，<strong>行李全程放车上，不再折返</strong>）。目的地导航到 <strong>CentralWorld / 原酒店 Grande Centre Point Ratchadamri</strong> 一带。找车方式同 Day4：Klook/KKday 提前订 或 Grab 现场叫。<strong>实测 3 点多到 CentralWorld</strong>。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 13:00-13:30 — 落地寄存行李</h5>
+            <h5>🕐 15:00 — 到 CentralWorld，找 Airpotels 把行李直接运到机场</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 约 30 分钟</span></div>
-            <p>到曼谷市中心后，<strong>先把大箱子寄存好再逛（关键，别折返！）</strong>。首选 <strong>Airporter 连锁行李寄存</strong>（泰国本地主流行李寄存 App，Siam / National Stadium / Chit Lom 商圈都有门店）：</p>
+            <p>✅ 实测方案：到曼谷市中心后，直接把<strong>大箱子交给 Airpotels（行李运送/托运服务）</strong>，让他们<strong>直接把行李运到素万那普机场</strong>——你们<strong>全程空手</strong>，不用拖着箱子逛街、看拳、赶车。</p>
+            <div class="tip-block">
+              <strong>⚠️ 关键：先确认「深夜取件」能不能行（别到机场拿不到箱子）</strong>
+              <ul>
+                <li>机场派送一般有<strong>固定取件时段</strong>（多在白天到前半夜），<strong>未必覆盖你 23:00 后到机场的时段</strong>。行李直接送机场的前提是：<strong>你到达机场的时间在它的服务时段内</strong>。</li>
+                <li>✅ <strong>下单前务必问到三件事</strong>：① 是否支持「<strong>深夜/24 小时门店取件</strong>」？② 送到机场的具体<strong>柜台位置和取件截止时间</strong>？③ 万一飞机延误/你到得晚，怎么处理？</li>
+                <li>如果对方答不上或只服务到 20:00，就<strong>不要押这条方案</strong>：改用「<strong>行李寄存</strong>」（Siam/Chit Lom 商圈门店，但需自己折返取），或最稳的——<strong>干脆拖箱看完拳，直接去机场</strong>（拳馆到机场也就 40-60 分钟）。</li>
+              </ul>
+            </div>
             <ul>
-              <li><strong>能存大箱子</strong>：专做行李寄存，24-28 寸托运箱都能存（按件计费，不按柜子，不用赌商场的免费小柜）。</li>
-              <li><strong>营业时间友好</strong>：多数门店 <strong>08:00–22:00</strong>，你 20:30 取件完全来得及，红眼航班不慌。</li>
-              <li><strong>价格</strong>：约 <strong>100–150 泰铢/件/天</strong>，3 人 3 个箱子约 300–450 泰铢，比折返芭提雅省下的时间精力划算太多。</li>
-              <li><strong>强烈建议提前订</strong>：在 <strong>Airporter App / Klook / KKday 提前下单锁位</strong>，到店扫码存，有监控 + 行李保险，热门时段现场可能满。</li>
+              <li><strong>怎么用</strong>：Airpotels 在泰国商场/商圈有服务点（CentralWorld 一带就有），App 或现场下单，按件计费，<strong>把行李托运到机场</strong>，你在约定时间到机场指定柜台领取，或机场送达。</li>
+              <li><strong>优势</strong>：彻底解放双手，逛完、看完拳、吃完宵夜直接空手去机场，不用中途折返取行李，最省心。</li>
+              <li><strong>建议提前订</strong>：提前在<strong>官网/Airpotels App/Klook</strong>下单，约好送机时间和领取点，避免现场满或临时约不到。</li>
+              <li><strong>价格</strong>：按件计费，比折返芭提雅取行李省时省力太多（具体以官网实时价为准）。</li>
             </ul>
-            <p>⚠️ 兜底方案（应急用）：<strong>Siam Paragon 百货顾客服务中心</strong>可免费短存，但<strong>只收小件、限时 2-3 小时、大箱子通常拒收</strong>，你这种 24-28 寸托运箱基本指望不上，别当主力。</p>
-            <p><strong>务必取行李再赶机</strong>——寄存点就在市中心购物区，逛完原地取件直接去机场，<strong>全程零折返</strong>。</p>
+            <p>⚠️ 兜底方案：若来不及用托运服务，也可用 <strong>Airporter 行李寄存</strong>（Siam/Chit Lom 商圈门店），但寄存还需自己折返取件，不如「直接运机场」省心。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 13:30-16:30 — 市中心购物扫货</h5>
-            <p>轻装开逛 <strong>CentralWorld / Siam Paragon / Big C</strong>——就在寄存点隔壁，不用拖着行李走。</p>
-            <p>🛍️ 伴手礼清单：青草膏、鼻通、泰丝、芒果干、榴莲干、欧莱雅（泰国全球最低价之一）、Vinda 等本土零食。Big C 是买伴手礼的性价比之王，什么都有还便宜。</p>
-            <img class="day-image" src="images/siam-shopping.jpg" alt="曼谷购物" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🕐 15:30-17:30 — 市中心购物扫货 + 简单吃口饭</h5>
+            <p>空手轻装开逛 <strong>CentralWorld / Siam Paragon / Big C</strong>——行李已经运去机场了，彻底不用拖着走。</p>
+            <p>🛍️ 伴手礼清单：青草膏、鼻通、泰丝、芒果干、榴莲干、欧莱雅（泰国全球最低价之一）、以及小老板海苔、Bento 鱿鱼丝、Koh-Kae 花生豆等泰国本土零食。Big C 是买伴手礼的性价比之王，什么都有还便宜。逛完<strong>简单吃口饭垫垫肚子</strong>，准备去看泰拳。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/bigc.webp" type="image/webp">
+  <img class="day-image" src="images/bigc.jpg" alt="Big C 超市扫货" width="1280" height="1707" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/centralworld.webp" type="image/webp">
+  <img class="day-image" src="images/centralworld.jpg" alt="CentralWorld 商场" width="1280" height="934" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
-            <h5>🕐 16:30-18:00 — 告别按摩</h5>
-            <div class="day-meta"><span class="meta-time">⏱️ 1.5 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
-            <p>逛累了，市区找家正规连锁（Health Land Sathorn 或 Let's Relax）做最后一次泰式按摩，给腿回血，为红眼航班储能。</p>
+            <h5>🕐 17:30 — 前往拳馆</h5>
+            <p>Grab 前往 <strong>Rajadamnern Stadium 拉差达慕拳击场</strong>（周三场，近 Victory Monument）。门票建议 <strong>Klook 或官网提前订</strong>。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 18:00-19:30 — 最后一顿好的</h5>
-            <p>去 <strong>Silom Soi Convent</strong> 或 Siam 商圈的餐厅吃一顿像样的告别晚餐。想省事就楼上商场美食广场解决，人均 200-400 泰铢。</p>
+            <h5>🕐 18:00-22:00 — 泰拳赛（周三 New Power 传统赛）</h5>
+            <div class="day-meta"><span class="meta-time">⏱️ 约 4 小时</span><span class="meta-easy">🏖️ 轻松</span></div>
+            <p>✅ 实测：我们 Day3 没订到票，就改到 7 号这天（周三）来看。<strong>周三 New Power 传统赛约 18:00 正式开打</strong>（17:00 左右入场），建议 <strong>21:30 前离场</strong>打车去机场——不用等打到散场。</p>
+            <div class="tip-block">
+              <strong>⏰ 泰拳时长 vs 赶飞机：怎么取舍？</strong>
+              <ul>
+                <li><strong>⭐ 推荐：21:00-21:30 主赛结束就走</strong>——前 4-5 场是铺垫和新人赛，<strong>压轴主赛（约 20:00-21:30）才是精华</strong>。看完主赛提前 Grab 去机场，时间从容。</li>
+                <li><strong>全程看完（约 23:00）也来得及</strong>：02:30 才起飞，22:30-23:00 离场打车、23:30-24:00 到机场，<strong>时间完全够</strong>——只要<strong>不打算逛免税店</strong>，值机 + 安检 + 退税都绰绰有余。</li>
+                <li><strong>实在不想熬夜</strong>：放弃拳赛，18:30 直接从 CentralWorld 打车去机场，机场休息室睡一觉，反而更舒服。</li>
+                <li>⚠️ 拳馆里闷热 + 噪音大，<strong>别指望在里面休息</strong>，精力要留给之后 4 小时候机。</li>
+              </ul>
+            </div>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/rajadamnern-1.webp" type="image/webp">
+  <img class="day-image" src="images/rajadamnern-1.jpg" alt="拉差达慕拳击场" width="1320" height="979" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/rajadamnern-2.webp" type="image/webp">
+  <img class="day-image" src="images/rajadamnern-2.jpg" alt="泰拳现场" width="1320" height="863" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
+          </div>
+          <div class="tip-block">
+            <strong>🥊 拉差达慕（Rajadamnern）每周赛程怎么选：</strong>
+            <ul>
+              <li><strong>周六：RWS 世界系列赛</strong> —— 最高规格，世界级制作 + 冠军战 + 免费啤酒，<strong>首选</strong>；约 18:00 开场</li>
+              <li><strong>周一/周二/周五：Rajadamnern Knockout（RKO 淘汰赛）</strong> —— 主打 80% KO 率、快节奏；17:00 开场</li>
+              <li><strong>周三（本行程）：New Power 传统赛</strong> —— 约 18:00 开打，泰国最老牌推广方、高端拳手、<strong>最大合法赌局场面</strong></li>
+              <li><strong>周四：Petchyindee 传统赛</strong> —— 本地人最爱、技术流；周日 Kiatpetch 传统赛</li>
+            </ul>
+            <p>💡 <strong>基本规则</strong>：传统赛 5 回合 × 3 分钟；每回合 5 分制；拳手赛前跳 <strong>Wai Kru（拜师舞）</strong>配现场鼓乐。二楼有<strong>合法下注区</strong>，外国游客围观即可、不必参与。现场<strong>允许拍照录像</strong>，票价按座位档次浮动，<strong>热门场次建议官网/Klook 提前订</strong>。</p>
+            <p class="note-sm">⚠️ 各场次开场时间偶有调整，<strong>订票前以官网当周赛程为准</strong>。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 19:30-20:30 — 取行李 + 休整</h5>
-            <p>回寄存点（Airporter 门店）<strong>取行李</strong>，在附近大厅休息、上厕所、把护照机票拿在手上。<strong>确认行李没有缺件、护照证件在随身包里</strong>，准备出发去机场。</p>
-          </div>
-          <div class="day-section">
-            <h5>🕐 20:30-21:30 — 前往素万那普机场</h5>
+            <h5>🕐 21:30-23:00 — 打车去机场（两个选择）</h5>
             <div class="day-meta"><span class="meta-time">⏱️ 车程约 40-60 分钟</span></div>
-            <p>从市中心 Grab 去机场（约 300-400 泰铢）。<strong>02:30 起飞，建议 20:30 就出发</strong>——避开市区晚高峰，也给自己留足机场办理免税退税的时间。</p>
+            <p>① <strong>看完主赛就走（约 21:30）</strong>：Grab 去素万那普机场（约 300-400 铢），到机场约 22:30，时间非常宽裕。</p>
+            <p>② <strong>看完整场再走（约 23:00）</strong>：<strong>也完全来得及</strong>——02:30 才起飞，23:00 离场、24:00 前到机场，值机 + 安检 + 退税 <strong>1 个多小时绰绰有余</strong>。✅ <strong>前提是不逛免税店</strong>（你不打算逛的话，就更没压力了）。</p>
+            <p>💡 两个时段都避开了市区晚高峰。唯一要注意：<strong>打车用 Grab 预约功能提前锁定</strong>，深夜拳馆外不好叫车。</p>
           </div>
           <div class="day-section">
-            <h5>🕐 21:30-00:30 — 机场值机 + 免税店 + 退税</h5>
-            <p>到机场后：① 先托运行李、办值机 ② 过安检出境 ③ <strong>办 VAT 退税</strong>（市区购物满 2000 泰铢，退税 7%，柜台在安检后海关处，留足时间）④ 逛 King Power 免税店，把没买齐的伴手礼补齐。</p>
-            <img class="day-image" src="images/airport.jpg" alt="素万那普机场" onclick="openLightbox(this.src)" loading="lazy">
+            <h5>🕐 23:00-01:30 — 机场：值机 → 安检 → 退税 →（可选）免税店</h5>
+            <p><strong>必做三步</strong>：① 托运行李、办值机 ② 过安检出境 ③ <strong>办 VAT 退税</strong>（市区购物满 2000 泰铢，退税 7%，柜台在安检后海关处）。</p>
+            <p>💡 <strong>不逛免税店的话</strong>：这三步做完（约 24:00-00:30）就没事了，剩下的时间找个舒服座位休息、给手机充电、眯一会儿，等登机就行——<strong>时间很充裕，一点不用赶</strong>。</p>
+            <p>🛍️ <strong>想逛的话</strong>：King Power 免税店就在安检后，可把没买齐的伴手礼补齐（也是消磨时间的好去处）。</p>
+            <div class="day-images-row">
+              <picture>
+  <source srcset="images/dutyfree-1.webp" type="image/webp">
+  <img class="day-image" src="images/dutyfree-1.jpg" alt="素万那普免税店" width="1280" height="949" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+              <picture>
+  <source srcset="images/dutyfree-2.webp" type="image/webp">
+  <img class="day-image" src="images/dutyfree-2.jpg" alt="免税店采购" width="1280" height="1707" loading="lazy" decoding="async" onclick="openLightbox(this.src)">
+</picture>
+            </div>
           </div>
           <div class="day-section">
-            <h5>🕐 00:30-02:00 — 候机（登机口）</h5>
-            <p>免税店逛到 00:30 左右就朝登机口去。红眼航班，登机口可能比较远，提前到。找个充电口，把手机电量充满，刷会儿手机等登机。</p>
+            <h5>🕐 01:30-02:00 — 前往登机口候机</h5>
+            <p>约 01:30 朝登机口走。红眼航班，登机口可能比较远，提前到。找个充电口把手机充满，刷会儿手机等登机。</p>
           </div>
           <div class="day-section">
             <h5>🕐 02:30 — 起飞 ✈️</h5>
@@ -1494,27 +1775,27 @@ body {
   <div class="timeline">
     <div class="timeline-item">
       <div class="timeline-dot"></div>
-      <div class="timeline-card"><div class="timeline-detail" style="display:block;">
+      <div class="timeline-card"><div class="timeline-detail always-open">
         <h5>✅ 已订好（无需再操作）</h5>
         <ul>
-          <li>✈️ 机票：10.1 浦东 17:00 → 曼谷 / 10.8 曼谷 02:30 → 浦东</li>
-          <li>🏨 酒店：曼谷 Grande Centre Point Ratchadamri（3晚）+ 芭提雅 Holiday Inn Pattaya（3晚）</li>
+          <li>✈️ 机票：去程 10.1 浦东 17:00 → 曼谷 / 返程 <strong>10.8 凌晨 02:30</strong> 曼谷 → 浦东（10.7 深夜须到机场）</li>
+          <li>🏨 酒店：曼谷 Grande Centre Point Ratchadamri（10.1-10.4，3 晚）+ 芭提雅 Holiday Inn Pattaya（10.4-10.7，3 晚）</li>
         </ul>
       </div></div>
     </div>
 
     <div class="timeline-item">
       <div class="timeline-dot"></div>
-      <div class="timeline-card"><div class="timeline-detail" style="display:block;">
+      <div class="timeline-card"><div class="timeline-detail always-open">
         <h5>🔄 出发前（现在～9月30日，可这几天办）</h5>
         <ul>
           <li><strong>📱 泰国电话卡</strong>：淘宝买 Happy / AIS 卡，提前插好或落地激活</li>
           <li><strong>💰 换泰铢</strong>：每人已带 5000 泰铢；如需补，可提前在国内换少量备用</li>
           <li><strong>🎟️ 提前买票（越早越好，旺季可能约满）</strong>：
             <ul>
-              <li>像素大楼 Mahanakhon 门票（Klook，约 170 元/人）— Day2 用</li>
-              <li>泰拳 Rajadamnern 一等座（Klook，2000 铢/人）— Day3 用</li>
-              <li>蒂芬妮秀 19:30 场（Klook，约 160-200 元/人）— Day5 用</li>
+              <li>像素大楼 Mahanakhon 门票（Klook，约 850 泰铢/人，约 170 元）— Day2 用</li>
+              <li>泰拳 Rajadamnern（周六 RWS 世界系列赛最热门，订不到可顺延周三传统赛；Klook/官网，价位按座位档次）— Day7 用</li>
+              <li>蒂芬妮秀 19:30 场（Klook，约 800-1000 泰铢/人，约 160-200 元）— Day5 用</li>
             </ul>
           </li>
           <li><strong>🚗 包车（曼谷→芭提雅）</strong>：Klook/KKday 提前 1-3 天订，SUV 约 2000 铢</li>
@@ -1524,15 +1805,15 @@ body {
 
     <div class="timeline-item">
       <div class="timeline-dot"></div>
-      <div class="timeline-card"><div class="timeline-detail" style="display:block;">
+      <div class="timeline-card"><div class="timeline-detail always-open">
         <h5>🔴 行程中必须「提前 1 天」订的（到达泰国后操作）</h5>
         <ul>
           <li><strong>日落悬崖餐厅 The Sky Gallery</strong>：<strong>Day4 前一天</strong>通过 Line 官方号（lin.ee/jRQusxY）订 17:00 看海落日位，靠海位置很抢手</li>
-          <li><strong>Health Land 按摩</strong>：Day2 当天电话/Line 预约，避免黄金时段等位</li>
+          <li><strong>按摩 / SPA 预约</strong>：Day2 晚上做（优先<strong>酒店自营 SPA</strong>，酒店没有则选 <strong>Health Land / Let's Relax</strong> 连锁）——提前半天电话或 Line 预约，避免黄金时段等位</li>
           <li><strong>包车（芭提雅→曼谷）</strong>：Day7 前一两天订，或当天 Grab 现场叫也行</li>
-          <li><strong>Airporter 行李寄存</strong>：Day7 当天或提前 1 天在 App/Klook 下单锁位</li>
+          <li><strong>Airpotels 行李托运到机场</strong>：Day7 当天或提前 1 天在官网/App/Klook 下单（把行李直接运到机场）</li>
         </ul>
-        <p style="font-size:13px;color:#888;margin-top:8px;">💡 一项都不落地记着：<strong>出发前把 3 张票 + 包车订好</strong>，<strong>Day4 前一天记得订悬崖餐厅</strong>，其余行程中临时订即可。</p>
+        <p class="note-xs">💡 一项都不落地记着：<strong>出发前把 3 张票 + 包车订好</strong>，<strong>Day4 前一天记得订悬崖餐厅</strong>，其余行程中临时订即可。</p>
       </div></div>
     </div>
   </div>
@@ -1549,13 +1830,12 @@ body {
     </div>
     <div class="checklist-category">
       <h4>证件与财务</h4>
-      <label><input type="checkbox" data-cat="docs"> 护照（有效期6个月以上）</label>
-      <label><input type="checkbox" data-cat="docs"> 机票行程单（电子版+纸质版）</label>
-      <label><input type="checkbox" data-cat="docs"> 酒店预订确认单</label>
-      <label><input type="checkbox" data-cat="docs"> 身份证（国内段备用）</label>
+      <label><input type="checkbox" data-cat="docs"> 护照（有效期6个月以上，✅ 全程只需这个）</label>
+      <label><input type="checkbox" data-cat="docs"> 电子入境卡（TDAC，⚠️ 值机前填好，别等落地）</label>
+      <label><input type="checkbox" data-cat="docs"> 机票行程单＋酒店预订单（电子版存手机，基本用不上）</label>
       <label><input type="checkbox" data-cat="docs"> 泰铢现金（每人已带 5000 泰铢）</label>
       <label><input type="checkbox" data-cat="docs"> Visa/Mastercard 信用卡</label>
-      <label><input type="checkbox" data-cat="docs"> 旅行保险单</label>
+      <label><input type="checkbox" data-cat="docs"> 旅行保险单（电子版即可）</label>
     </div>
     <div class="checklist-category">
       <h4>电子设备</h4>
@@ -1588,14 +1868,14 @@ body {
     <div class="info-card">
       <h4>🟢 能用微信/支付宝的（优先扫，不动现金）</h4>
       <ul>
-        <li><strong>7-11 / 全家</strong>：买水、零食、充值</li>
+        <li><strong>7-Eleven / 全家</strong>：买水、零食、充值</li>
         <li><strong>Big C、CentralWorld、Siam Paragon、ICONSIAM</strong> 等商场超市</li>
         <li><strong>King Power 免税店</strong>（必有支付宝/微信）</li>
         <li><strong>餐厅</strong>：Health Land 按摩、悬崖餐厅、天台吧、商场美食广场</li>
         <li><strong>恰图恰里"有店铺"的大店</strong>（部分支持）</li>
         <li><strong>Klook 订的门票/包车</strong>：出发前线上人民币直付</li>
       </ul>
-      <p style="font-size:13px;color:#888;margin-top:8px;">⚠️ <strong>Grab</strong> 建议绑 Visa/Mastercard，支付宝绑 Grab 不稳定。</p>
+      <p class="note-xs">⚠️ <strong>Grab</strong> 建议绑 Visa/Mastercard，支付宝绑 Grab 不稳定。</p>
     </div>
 
     <div class="info-card">
@@ -1616,9 +1896,9 @@ body {
         <li><strong>10.2–10.3</strong>：恰图恰扫货（🔥最大现金出口）+ 路边摊 → 累计约 5000–6000</li>
         <li><strong>10.4–10.5</strong>：真理寺门票、双条车、排档 → 累计约 8000–9000</li>
         <li><strong>10.6</strong>：🔥海鲜市场自购 + 加工 → 累计约 10000–11000</li>
-        <li><strong>10.7</strong>：寄存、告别餐、机场零花 → 接近见底</li>
+        <li><strong>10.7</strong>：行李托运（Airpotels）、告别餐、机场零花 → 接近见底</li>
       </ul>
-      <p style="font-size:13px;color:#888;margin-top:8px;">微信/支付宝可覆盖约 <strong>50–60%</strong> 支出，现金 15000 泰铢约撑到 Day5–Day6。</p>
+      <p class="note-xs">微信/支付宝可覆盖约 <strong>50–60%</strong> 支出，现金 15000 泰铢约撑到 Day5–Day6。</p>
     </div>
 
     <div class="info-card">
@@ -1629,7 +1909,7 @@ body {
         <li><strong>换钱渠道排序</strong>：<strong>SuperRich（橙牌）</strong> &gt; 银联 ATM 取现 &gt; 酒店/兑换店</li>
         <li>⚠️ 别在机场换大额（汇率差），机场只换 1000–2000 泰铢应急</li>
       </ul>
-      <p style="font-size:13px;color:#888;margin-top:8px;">银联 ATM 每笔有手续费（约 150–220 泰铢），一次多取更划算。</p>
+      <p class="note-xs">银联 ATM 每笔有手续费（约 150–220 泰铢），一次多取更划算。</p>
     </div>
   </div>
 </section>
@@ -1744,64 +2024,104 @@ body {
   <h2 class="section-title">精彩预览</h2>
   <p class="section-subtitle">点击图片可放大查看</p>
   <div class="gallery-grid">
-    <div class="gallery-item" onclick="openLightbox('images/wat-arun.jpg')">
-      <img src="images/wat-arun.jpg" alt="郑王庙" loading="lazy">
-      <div class="caption">郑王庙（黎明寺）</div>
+    <div class="gallery-item" onclick="openLightbox('images/grand-palace-1.jpg')">
+      <picture>
+  <source srcset="images/grand-palace-1.webp" type="image/webp">
+  <img class="day-image" src="images/grand-palace-1.jpg" alt="大皇宫" width="1279" height="1639" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">大皇宫</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/bangkok-skyline.jpg')">
-      <img src="images/bangkok-skyline.jpg" alt="曼谷夜景" loading="lazy">
-      <div class="caption">曼谷城市夜景</div>
+    <div class="gallery-item" onclick="openLightbox('images/wat-paknam.jpg')">
+      <picture>
+  <source srcset="images/wat-paknam.webp" type="image/webp">
+  <img class="day-image" src="images/wat-paknam.jpg" alt="水门寺大佛" width="1279" height="1706" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">水门寺金色大佛</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/yaowarat.jpg')">
-      <img src="images/yaowarat.jpg" alt="曼谷唐人街夜景" loading="lazy">
-      <div class="caption">曼谷唐人街夜景</div>
+    <div class="gallery-item" onclick="openLightbox('images/chatuchak.jpg')">
+      <picture>
+  <source srcset="images/chatuchak.webp" type="image/webp">
+  <img class="day-image" src="images/chatuchak.jpg" alt="恰图恰周末市场" width="1320" height="982" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">恰图恰周末市场</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/pattaya-beach.jpg')">
-      <img src="images/pattaya-beach.jpg" alt="芭提雅海滩" loading="lazy">
-      <div class="caption">芭提雅海滩</div>
+    <div class="gallery-item" onclick="openLightbox('images/saxophone1.jpg')">
+      <picture>
+  <source srcset="images/saxophone1.webp" type="image/webp">
+  <img class="day-image" src="images/saxophone1.jpg" alt="Saxophone 爵士酒吧" width="1317" height="982" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">Saxophone 爵士酒吧</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/sanctuary-of-truth.jpg')">
-      <img src="images/sanctuary-of-truth.jpg" alt="真理寺" loading="lazy">
-      <div class="caption">真理寺</div>
+    <div class="gallery-item" onclick="openLightbox('images/sky-gallery-1.jpg')">
+      <picture>
+  <source srcset="images/sky-gallery-1.webp" type="image/webp">
+  <img class="day-image" src="images/sky-gallery-1.jpg" alt="悬崖餐厅日落" width="1280" height="1707" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">悬崖餐厅日落</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/koh-larn-beach1.jpg')">
-      <img src="images/koh-larn-beach1.jpg" alt="格兰岛" loading="lazy">
-      <div class="caption">格兰岛果冻海</div>
+    <div class="gallery-item" onclick="openLightbox('images/walking-street.jpg')">
+      <picture>
+  <source srcset="images/walking-street.webp" type="image/webp">
+  <img class="day-image" src="images/walking-street.jpg" alt="芭提雅步行街" width="1320" height="979" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">芭提雅步行街</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/night-market.jpg')">
-      <img src="images/night-market.jpg" alt="夜市" loading="lazy">
-      <div class="caption">曼谷夜市</div>
+    <div class="gallery-item" onclick="openLightbox('images/tawaen-beach.jpg')">
+      <picture>
+  <source srcset="images/tawaen-beach.webp" type="image/webp">
+  <img class="day-image" src="images/tawaen-beach.jpg" alt="Tawaen 沙滩" width="1280" height="714" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">Tawaen 沙滩</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/pattaya-sunset.jpg')">
-      <img src="images/pattaya-sunset.jpg" alt="芭提雅日落" loading="lazy">
-      <div class="caption">芭提雅日落</div>
+    <div class="gallery-item" onclick="openLightbox('images/samae-beach.jpg')">
+      <picture>
+  <source srcset="images/samae-beach.webp" type="image/webp">
+  <img class="day-image" src="images/samae-beach.jpg" alt="Samae 沙滩" width="1280" height="972" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">Samae 沙滩</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/thai-boat-noodle.jpg')">
-      <img src="images/thai-boat-noodle.jpg" alt="泰式船面" loading="lazy">
-      <div class="caption">泰式船面</div>
+    <div class="gallery-item" onclick="openLightbox('images/seafood-dinner.jpg')">
+      <picture>
+  <source srcset="images/seafood-dinner.webp" type="image/webp">
+  <img class="day-image" src="images/seafood-dinner.jpg" alt="海鲜大餐" width="1280" height="1707" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">兰坡海鲜大餐</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/seafood-market.jpg')">
-      <img src="images/seafood-market.jpg" alt="炭烤海鲜" loading="lazy">
-      <div class="caption">炭烤海鲜</div>
+    <div class="gallery-item" onclick="openLightbox('images/grande-centre-point.jpg')">
+      <picture>
+  <source srcset="images/grande-centre-point.webp" type="image/webp">
+  <img class="day-image" src="images/grande-centre-point.jpg" alt="拉查丹利中心酒店" width="972" height="648" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">拉查丹利中心酒店</div>
     </div>
-    <div class="gallery-item" onclick="openLightbox('images/siam-shopping.jpg')">
-      <img src="images/siam-shopping.jpg" alt="曼谷暹罗商圈" loading="lazy">
-      <div class="caption">暹罗商圈</div>
+    <div class="gallery-item" onclick="openLightbox('images/holiday-inn-pattaya.jpg')">
+      <picture>
+  <source srcset="images/holiday-inn-pattaya.webp" type="image/webp">
+  <img class="day-image" src="images/holiday-inn-pattaya.jpg" alt="芭提雅假日酒店" width="733" height="550" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">芭提雅假日酒店</div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('images/rajadamnern-2.jpg')">
+      <picture>
+  <source srcset="images/rajadamnern-2.webp" type="image/webp">
+  <img class="day-image" src="images/rajadamnern-2.jpg" alt="泰拳现场" width="1320" height="863" loading="lazy" decoding="async">
+</picture>
+      <div class="caption">拉差达慕泰拳现场</div>
     </div>
   </div>
 </section>
 
 <!-- Lightbox -->
-<div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
-  <span class="close">&times;</span>
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="图片预览">
+  <button class="close" type="button" aria-label="关闭">&times;</button>
   <img src="" alt="" id="lightbox-img">
 </div>
 
 
 <section class="section" id="budget">
   <h2 class="section-title">预算参考</h2>
-  <p class="section-subtitle">以下为一人估算（单位：人民币），可根据实际调整数量</p>
-  <div style="overflow-x: auto;">
+  <p class="section-subtitle">以下为<strong>人均</strong>估算（单位：人民币，3 人同行分摊），可根据实际调整数量</p>
+  <div class="table-scroll">
     <table class="budget-table" id="budget-table">
       <thead>
         <tr>
@@ -1815,85 +2135,120 @@ body {
       <tbody>
         <tr>
           <td>✈️ 机票</td>
-          <td>上海 ↔ 曼谷 往返</td>
-          <td>3000</td>
+          <td>上海 ↔ 曼谷 往返（含托运，国庆旺季实价）</td>
+          <td>5000</td>
           <td>1</td>
-          <td class="subtotal" data-price="3000" data-qty="1">3000</td>
+          <td class="subtotal" data-price="5000" data-qty="1">5000</td>
         </tr>
         <tr>
           <td>🏨 住宿</td>
-          <td>曼谷酒店（3晚）</td>
-          <td>400</td>
-          <td><input type="number" value="3" min="1" max="10" onchange="recalc()"></td>
-          <td class="subtotal" data-price="400" data-qty="3">1200</td>
+          <td>曼谷 Grande Centre Point（3晚套房，人均分摊）</td>
+          <td>1400</td>
+          <td>1</td>
+          <td class="subtotal" data-price="1400" data-qty="1">1400</td>
         </tr>
         <tr>
           <td>🏨 住宿</td>
-          <td>芭提雅酒店（3晚）</td>
-          <td>350</td>
-          <td><input type="number" value="3" min="1" max="10" onchange="recalc()"></td>
-          <td class="subtotal" data-price="350" data-qty="3">1050</td>
+          <td>芭提雅 Holiday Inn（3晚套房，人均分摊）</td>
+          <td>2133</td>
+          <td>1</td>
+          <td class="subtotal" data-price="2133" data-qty="1">2133</td>
         </tr>
         <tr>
           <td>🍜 餐饮</td>
-          <td>每日三餐+零食饮料</td>
-          <td>150</td>
+          <td>每日三餐+零食饮料（含海鲜大餐/酒吧/悬崖餐厅）</td>
+          <td>300</td>
           <td><input type="number" value="7" min="1" max="14" onchange="recalc()"></td>
-          <td class="subtotal" data-price="150" data-qty="7">1050</td>
+          <td class="subtotal" data-price="300" data-qty="7">2100</td>
         </tr>
         <tr>
           <td>🚗 交通</td>
-          <td>曼谷→芭提雅包车+返程</td>
-          <td>150</td>
-          <td><input type="number" value="2" min="1" max="4" onchange="recalc()"></td>
-          <td class="subtotal" data-price="150" data-qty="2">300</td>
+          <td>曼谷↔芭提雅包车往返（人均分摊）</td>
+          <td>267</td>
+          <td>1</td>
+          <td class="subtotal" data-price="267" data-qty="1">267</td>
         </tr>
         <tr>
           <td>🚗 交通</td>
           <td>市内交通（BTS/地铁/Grab/双条车）</td>
-          <td>50</td>
+          <td>60</td>
           <td><input type="number" value="7" min="1" max="14" onchange="recalc()"></td>
-          <td class="subtotal" data-price="50" data-qty="7">350</td>
+          <td class="subtotal" data-price="60" data-qty="7">420</td>
         </tr>
         <tr>
           <td>🎟️ 门票</td>
-          <td>郑王庙+像素大楼+真理寺+格兰岛船票</td>
-          <td>350</td>
+          <td>大皇宫 + 玉佛寺（500 铢/人）</td>
+          <td>100</td>
           <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
-          <td class="subtotal" data-price="350" data-qty="1">350</td>
+          <td class="subtotal" data-price="100" data-qty="1">100</td>
+        </tr>
+        <tr>
+          <td>🎟️ 门票</td>
+          <td>卧佛寺（200 铢）+ 郑王庙（100 铢）+ 渡轮</td>
+          <td>65</td>
+          <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
+          <td class="subtotal" data-price="65" data-qty="1">65</td>
+        </tr>
+        <tr>
+          <td>🎟️ 门票</td>
+          <td>Mahanakhon 像素大楼 SkyWalk（850 铢/人）</td>
+          <td>170</td>
+          <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
+          <td class="subtotal" data-price="170" data-qty="1">170</td>
+        </tr>
+        <tr>
+          <td>🎟️ 门票</td>
+          <td>真理寺（500 铢/人）+ 格兰岛轮渡（40 铢）</td>
+          <td>110</td>
+          <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
+          <td class="subtotal" data-price="110" data-qty="1">110</td>
+        </tr>
+        <tr>
+          <td>🎟️ 门票</td>
+          <td>Rajadamnern 泰拳赛（按座位档次，约 1500-2500 铢）</td>
+          <td>400</td>
+          <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
+          <td class="subtotal" data-price="400" data-qty="1">400</td>
+        </tr>
+        <tr>
+          <td>🎟️ 门票</td>
+          <td>蒂芬妮秀（Klook 约 800-1000 铢/人）</td>
+          <td>180</td>
+          <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
+          <td class="subtotal" data-price="180" data-qty="1">180</td>
         </tr>
         <tr>
           <td>💆 休闲</td>
-          <td>泰式按摩 x2次</td>
-          <td>150</td>
+          <td>泰式按摩 / SPA（大型连锁约200/次，酒店高端400-600）</td>
+          <td>200</td>
           <td><input type="number" value="2" min="0" max="7" onchange="recalc()"></td>
-          <td class="subtotal" data-price="150" data-qty="2">300</td>
+          <td class="subtotal" data-price="200" data-qty="2">400</td>
         </tr>
         <tr>
           <td>🏄 活动</td>
-          <td>格兰岛水上项目（拖曳伞等）</td>
-          <td>200</td>
+          <td>格兰岛水上项目（摩托艇/香蕉船等）</td>
+          <td>300</td>
           <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
-          <td class="subtotal" data-price="200" data-qty="1">200</td>
+          <td class="subtotal" data-price="300" data-qty="1">300</td>
         </tr>
         <tr>
           <td>📱 其他</td>
-          <td>电话卡+签证+保险+小费+伴手礼</td>
-          <td>500</td>
+          <td>电话卡+签证+保险+小费+伴手礼+免税店</td>
+          <td>1000</td>
           <td><input type="number" value="1" min="0" max="5" onchange="recalc()"></td>
-          <td class="subtotal" data-price="500" data-qty="1">500</td>
+          <td class="subtotal" data-price="1000" data-qty="1">1000</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
           <td colspan="4">人均总计（人民币）</td>
-          <td id="total-price">8300</td>
+          <td id="total-price">14045</td>
         </tr>
       </tfoot>
     </table>
   </div>
-  <p class="price-note">* 以上为舒适中等档位参考价，机票和酒店旺季建议提前 2-3 个月预订。人均总预算约 7000-12000 元。</p>
-  <p class="price-note">💵 <strong>现金提示</strong>：你们每人已带 <strong>5000 泰铢</strong>（约 1000 元人民币），3 人共 15000 泰铢。日常零花（餐饮、双条车、路边摊、市集、小费）用现金，<strong>大额支出（酒店、按摩、餐厅、景点门票）尽量刷卡/支付宝</strong>，现金够用且更有底气。</p>
+  <p class="price-note">* 以上为<strong>本次实际行程的人均参考</strong>（国庆旺季价）：机票为实际支出（含托运，具体金额以实际订单为准），两家酒店按实际总价 3 人分摊，其余按行程内容估算。<strong>门票已逐项拆开</strong>，可按实际去/不去调节数量。人均总预算约 <strong>14,000-16,000 元</strong>（约 70,000-80,000 泰铢），3 人合计约 <strong>4.2-4.8 万元</strong>。淡季出行机票和酒店价格会明显更低。</p>
+  <p class="price-note">💵 <strong>现金提示</strong>：你们每人已带 <strong>5000 泰铢</strong>（约 1000 元），3 人共 15000 泰铢。日常零花（餐饮、双条车、路边摊、市集、小费）用现金，<strong>大额支出（酒店、按摩、餐厅、景点门票）尽量刷卡/支付宝</strong>，现金够用且更有底气。</p>
 </section>
 
 <section class="section" id="tips">
@@ -1905,8 +2260,9 @@ body {
       <h4>🛂 签证与入境</h4>
       <ul>
         <li>泰国对中国护照实行免签（2024年起），单次停留不超过30天</li>
-        <li>需携带：护照（有效期6个月以上）+ 返程机票 + 酒店预订单</li>
-        <li>入境卡在飞机上填写，备一支笔</li>
+        <li>✅ 实测全程只需：护照（有效期6个月以上）+ 电子入境卡（TDAC）</li>
+        <li>电子入境卡建议出发前（⚠️ 值机前）在官网填好，购票平台（如飞猪）买票后也有快捷填写入口</li>
+        <li>行程单、酒店预订单基本不会被查，存电子版到手机里备用即可</li>
       </ul>
     </div>
 
@@ -2026,7 +2382,7 @@ body {
   <div class="footer-ornament">🛕 🌊 🥥</div>
   <div class="footer-title">ขอให้เดินทางโดยสวัสดิภาพ</div>
   <p>祝旅途平安 · 一路顺风</p>
-  <p style="font-size: 0.75rem; margin-top: 16px; opacity: 0.5;">2026.10.01 — 10.08 &nbsp;|&nbsp; 上海 ↔ 曼谷 &nbsp;|&nbsp; 曼谷 + 芭提雅</p>
+  <p class="footer-meta">2026.10.01 — 10.08 &nbsp;|&nbsp; 上海 ↔ 曼谷 &nbsp;|&nbsp; 曼谷 + 芭提雅</p>
 </footer>
 
 <!-- Back to top -->
@@ -2034,35 +2390,6 @@ body {
 
 <!-- Scripts -->
 <script>
-
-// ===== Countdown =====
-(function initCountdown() {
-  function update() {
-    const target = new Date('2026-10-01T17:00:00+08:00').getTime();
-    const now = Date.now();
-    const diff = target - now;
-
-    if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '0';
-      document.getElementById('cd-hours').textContent = '0';
-      document.getElementById('cd-mins').textContent = '0';
-      document.getElementById('cd-secs').textContent = '0';
-      return;
-    }
-
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-
-    document.getElementById('cd-days').textContent = d;
-    document.getElementById('cd-hours').textContent = String(h).padStart(2, '0');
-    document.getElementById('cd-mins').textContent = String(m).padStart(2, '0');
-    document.getElementById('cd-secs').textContent = String(s).padStart(2, '0');
-  }
-  update();
-  setInterval(update, 1000);
-})();
 
 // ===== Checklist =====
 (function initChecklist() {
@@ -2079,12 +2406,17 @@ body {
     progressText.textContent = checked + ' / ' + total + ' 已完成';
   }
 
+  // 给每个 checkbox 编上稳定序号（配合 data-cat 组成唯一 key）
+  checkboxes.forEach((cb, i) => { cb.dataset.idx = i; });
+
   checkboxes.forEach(cb => {
-    const saved = localStorage.getItem('th-checklist-' + cb.parentElement.textContent.trim().slice(0, 30));
+    // 用「分类 + 序号」做 key，避免不同条目文本前 30 字相同导致互相覆盖
+    const key = 'th-checklist-' + (cb.dataset.cat || 'x') + '-' + cb.dataset.idx;
+    const saved = localStorage.getItem(key);
     if (saved === 'true') { cb.checked = true; cb.parentElement.classList.add('checked'); }
     cb.addEventListener('change', function() {
       this.parentElement.classList.toggle('checked', this.checked);
-      localStorage.setItem('th-checklist-' + this.parentElement.textContent.trim().slice(0, 30), this.checked);
+      localStorage.setItem(key, this.checked);
       updateProgress();
     });
   });
@@ -2093,7 +2425,18 @@ body {
 })();
 
 // ===== Timeline Toggle =====
-function toggleDay(card) {
+function toggleDay(card, ev) {
+  // 只有点击卡片头部（标题区）才展开/收起；
+  // 点击正文、图片、选择文字（有选区）时不触发收起
+  if (ev) {
+    const t = ev.target;
+    // 有文字选区时不切换（避免多选文字松手误触发）
+    const sel = window.getSelection && window.getSelection();
+    if (sel && sel.toString().length > 0) return;
+    if (t && (t.closest('.day-image') || t.closest('.timeline-detail'))) {
+      return;
+    }
+  }
   card.classList.toggle('open');
 }
 
@@ -2115,8 +2458,10 @@ function toggleDay(card) {
     // 展开该天
     const card = target.querySelector('.timeline-card');
     if (card) card.classList.add('open');
-    // 平滑滚动
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // 滚动到该天（减去固定导航高度，避免标题被导航遮住）
+    const navH = document.getElementById('nav').offsetHeight + 56;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH;
+    window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
   });
 
   // 全部展开 / 收起
@@ -2130,26 +2475,75 @@ function toggleDay(card) {
     });
   }
 
-  // 滚动时高亮当前 Day
-  const items = document.querySelectorAll('#timeline .timeline-item[id^="day"]');
-  const navBtns = nav.querySelectorAll('.day-nav-btn');
+  // 滚动时高亮当前 Day（节流 + 缓存 offsetTop，避免长页面每帧重排）
+  const items = Array.from(document.querySelectorAll('#timeline .timeline-item[id^="day"]'));
+  const navBtns = Array.from(nav.querySelectorAll('.day-nav-btn'));
+  let tops = [];
+
+  function measure() {
+    tops = items.map(item => ({ id: item.id, top: item.getBoundingClientRect().top + window.scrollY }));
+  }
+  measure();
+  window.addEventListener('resize', measure);
+  window.addEventListener('load', measure);
+
+  let ticking = false;
   window.addEventListener('scroll', function() {
-    let current = 'day1';
-    items.forEach(item => {
-      if (window.scrollY >= item.offsetTop - 140) current = item.id;
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      ticking = false;
+      const y = window.scrollY;
+      let current = tops.length ? tops[0].id : 'day1';
+      for (let i = 0; i < tops.length; i++) {
+        if (y >= tops[i].top - 140) current = tops[i].id;
+      }
+      navBtns.forEach(b => b.classList.toggle('active', b.dataset.target === current));
     });
-    navBtns.forEach(b => {
-      b.classList.toggle('active', b.dataset.target === current);
-    });
-  });
+  }, { passive: true });
 })();
 
 // ===== Lightbox =====
+let lbLastFocus = null;
 function openLightbox(src) {
   const lb = document.getElementById('lightbox');
-  document.getElementById('lightbox-img').src = src;
+  const img = document.getElementById('lightbox-img');
+  lbLastFocus = document.activeElement;
+  img.src = src;
   lb.classList.add('show');
+  // 锁定背景滚动，避免灯箱上滑动导致页面滚动错乱
+  document.body.style.overflow = 'hidden';
+  // 焦点移到关闭按钮，方便键盘与读屏用户
+  const btn = lb.querySelector('.close');
+  if (btn) btn.focus({ preventScroll: true });
 }
+
+function closeLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (!lb.classList.contains('show')) return;
+  lb.classList.remove('show');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+  if (lbLastFocus && lbLastFocus.focus) lbLastFocus.focus({ preventScroll: true });
+}
+
+// 点遮罩或关闭按钮关闭；Esc 也可关闭
+(function initLightbox() {
+  const lb = document.getElementById('lightbox');
+  if (!lb) return;
+  lb.addEventListener('click', function(e) {
+    if (e.target === this || e.target.closest('.close')) closeLightbox();
+  });
+  // 图片加载失败：给出文字提示，避免出现「点不掉的空白遮罩」
+  document.getElementById('lightbox-img').addEventListener('error', function() {
+    if (lb.classList.contains('show')) {
+      this.alt = '图片加载失败，点击任意处关闭';
+    }
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+})();
 
 // ===== Budget Calculator =====
 function recalc() {
@@ -2184,6 +2578,20 @@ function speakThai(text) {
 (function initNavScroll() {
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav a');
+
+  // 顶部导航平滑滚动（因全局已关 smooth，这里手动接管锚点跳转）
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const id = link.getAttribute('href');
+      if (!id || !id.startsWith('#')) return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        history.replaceState(null, '', id);
+      }
+    });
+  });
 
   window.addEventListener('scroll', () => {
     const currentY = window.scrollY;
